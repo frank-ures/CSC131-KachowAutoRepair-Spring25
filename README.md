@@ -72,7 +72,7 @@ To use the Kachow Auto Repair website:
 
 ## Contact
 
-* For any questions or inquiries, please contact a [member](#Team Members) of the development team listed above.
+* For any questions or inquiries, please contact a [member](#Team-Members) of the development team listed above.
 * For bugs or requests about this product, open an issue on the repository.
 
 ## License
