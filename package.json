@@ -1,0 +1,32 @@
+{
+  "name": "csc131-kachowautorepair-spring25",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frank-ures/CSC131-KachowAutoRepair-Spring25.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frank-ures/CSC131-KachowAutoRepair-Spring25/issues"
+  },
+  "homepage": "https://github.com/frank-ures/CSC131-KachowAutoRepair-Spring25#readme",
+  "dependencies": {
+    "devenv": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.14.2",
+    "mongoose": "^8.12.1",
+    "mongose": "^0.0.2-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
