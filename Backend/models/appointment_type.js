@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const AppointmentTypeSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
   name: {type: String, required: true},
   priceMin: {type: Number, required: true},
   priceMax: {type: Number, required: true},

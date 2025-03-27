@@ -33,7 +33,6 @@ const registerUser = async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      id: "7",
       firstName: "Jane",
       lastName: "Doe",
       username: 'JaneD',

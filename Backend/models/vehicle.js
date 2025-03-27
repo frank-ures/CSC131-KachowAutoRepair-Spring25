@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const VehicleSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
   vin: {type: String, required: true},
   licensePlate: {type: String, required: true},
   year: {type: Number, required: true},

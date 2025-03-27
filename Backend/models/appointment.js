@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const AppointmentSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
   apptTypeIds: {type: Array, required: true},
   timeStarted: {type: String, required: true},
   timeComplete: {type: String, required: true},

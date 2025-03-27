@@ -8,9 +8,8 @@ dotenv.config();
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-    console.log("here");
     try {
-      const { id, firstName, lastName, username, email, password, role, hourlyWage } = req.body;
+      const { firstName, lastName, username, email, password, role, hourlyWage } = req.body;
       
       if ( !username || !email || !password ) {
           return res.status(400).json({ error: 'All fields required' });
@@ -23,7 +22,6 @@ router.post('/register', async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({
-        id,
         firstName,
         lastName,
         username,
@@ -35,7 +33,7 @@ router.post('/register', async (req, res) => {
       await user.save();
       res.status(201).json({ message: 'Registration successful' });
     } catch (error) {
-      res.status(500).json({ error: ' -- Registration failed' });
+      res.status(500).json({ error: 'Registration failed' });
     }
 });
 
