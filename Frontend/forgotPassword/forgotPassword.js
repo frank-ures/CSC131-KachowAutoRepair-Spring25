@@ -2,6 +2,12 @@ const emailField = document.getElementById("email-field");
 const emailError = document.getElementById("email-error");
 const form = document.getElementById("forgot-form");
 
+
+const statusMessage = document.createElement("p");
+statusMessage.id = "status-message";
+statusMessage.style.marginTop = "10px";
+form.appendChild(statusMessage);
+
 function validateEmail() {
   const email = emailField.value;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,7 +31,16 @@ form.addEventListener("submit", async (e) => {
   });
 
   const data = await res.json();
-  alert(data.message || data.error);
+
+  statusMessage.textContent = data.message || data.error;
+  statusMessage.style.color = res.ok ? "lightgreen" : "red";
+
+  if (res.ok) {
+    // Redirect to login after 3 seconds
+    setTimeout(() => {
+      window.location.href = "/Frontend/login/loginpage.html";
+    }, 3000);
+  }
 });
 
 emailField.addEventListener("input", validateEmail);

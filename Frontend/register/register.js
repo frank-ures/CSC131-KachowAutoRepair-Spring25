@@ -42,7 +42,7 @@ form.addEventListener("submit", async (e) => {
       message.textContent = "🎉 Registration successful!";
       form.reset();
       setTimeout(() => {
-        window.location.href = "loginpage.html";
+        window.location.href = "/Frontend/login/loginpage.html";
       }, 2000);
     } else {
       message.style.color = "red";
