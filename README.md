@@ -5,7 +5,7 @@
 
 ---
 
-## Project Overview
+## Project EmployeeOverview
 
 As websites become increasingly commonplace, many people feel frustrated when they realize that auto repair shops refuse to adapt. Customers expect easy online booking regardless of the industry, so when they find out that most mechanics only offer face-to-face appointment booking, they become annoyed and take their business elsewhere. Many traditional auto repair shops suffer from disorganization, with payroll often being on slow, outdated systems and clients' vehicle service history stored in physical files that are vulnerable to clutter and mismanagement.
 
@@ -22,7 +22,7 @@ Kachow Auto Repair (KAR) provides a website where every service is unified under
 ## Features
 
 * Customer Dashboard
-  * Schedule an appointment.
+  * EmployeeSchedule an appointment.
   * View appointment history.
   * View upcoming appointments.
   * Write a review.
@@ -68,7 +68,7 @@ To use the Kachow Auto Repair website:
 1. Follow the full [installation procedure](#Installation) stated above.
 2. Navigate to `http://localhost:5000` (use port number from installation step 4).
 3. Create an account or login to an existing account.
-4. Schedule and manage automotive appointments, or explore other features the website has to offer.
+4. EmployeeSchedule and manage automotive appointments, or explore other features the website has to offer.
 
 ## Contact
 
