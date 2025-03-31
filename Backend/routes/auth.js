@@ -84,14 +84,16 @@ router.post('/forgot-password', async (req, res) => {
     user.resetTokenExpiry = Date.now() + 1000 * 60 * 30; // 30 min
     await user.save();
 
-    const resetLink = `http://localhost:5500/reset-password.html?token=${token}`;
+    const resetLink = `${process.env.FRONTEND_BASE_URL}/resetPassword.html?token=${token}`;
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT),
+      secure: process.env.EMAIL_SECURE === "true", // true for port 465
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
     await transporter.sendMail({
@@ -133,4 +135,5 @@ router.post('/reset-password/:token', async (req, res) => {
     res.status(500).json({ error: 'Failed to reset password' });
   }
 });
+
 export default router;

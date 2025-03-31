@@ -44,7 +44,7 @@ form.addEventListener("submit", async (e) => {
       successMessage.textContent = "🎉 Password reset successful! You can now log in.";
       form.reset();
       setTimeout(() => {
-        window.location.href = "loginpage.html";
+        window.location.href = "/Frontend/login/loginpage.html";
       }, 3000); // 3-second delay
     } else {
       passwordError.textContent = data.error || "Password reset failed.";
