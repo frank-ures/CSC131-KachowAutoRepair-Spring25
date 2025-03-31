@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+  background-color: black;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding-left: 10px;
+  
+}
+
+
+.header div{
+  height: auto;
+  color: yellow;
+  font-weight: bold;
+  width: 375px;
+  background-color: gray;
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo header{
+  display: flex;
+  border-style: solid;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 15px 50px;
+  list-style: none;
+}
+
+.logo img {
+  height: auto;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.back-button{
+  height: auto;
+  padding: 5px 10px;
+  color: #DE1E29;
+  border: none;
+  cursor: pointer;
+}
+
+
+header nav{
+  display: flex;
+  border-color: white;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #DE1E29;
+  padding: 15px 20px;
+}
+
+
+
+.nav-links{
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li{
+  margin: 0 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: black;
+}
+
+@media (max-width: 768px){
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+
+  }
+
+}
+
+/* Style for active (clicked) button */
+.events-container button.active {
+  background-color: #DE1E29 !important; /* Red background when active */
+  color: white !important;  /* Text color */
+}
+
+
+.calendly-container {
+  display: flex !important;
+  justify-content: center !important; /* Centers horizontally */
+  align-items: center !important; 
+  height: 100vh !important; 
+}
+
+.calendly-inline-widget iframe {
+  width: 100% !important;
+  padding: 0 15%;
+}
+
+.calendly-inline-widget {
+  display: block !important;
+  margin: auto !important;
+  width: 90% !important;  
+  max-width: 900px !important;
+  height: 800px !important;
+  
+}
+
+/* Container to hold all event buttons */
+.events-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+  padding: 20px !important;
+  justify-content: center !important;
+}
+
+/* Styling for each event button */
+.events-container .event-button {
+  background-color: gray !important;
+  color: white !important;
+  font-size: 20px !important;
+  padding: 15px 25px !important;
+  border: 2px solid white !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  width: 250px !important;
+  margin: 10px !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Hover effect to make the button stand out */
+.events-container .event-button:hover {
+  background-color: #DE1E29 !important;
+  color: white !important;
+  transform: scale(1.05) !important; /* Slightly enlarge the button on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .events-container {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .events-container .event-button {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+}
+
+
+
+
