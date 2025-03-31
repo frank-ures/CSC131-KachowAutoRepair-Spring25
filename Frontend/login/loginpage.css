@@ -1,0 +1,157 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Fill the entire viewport height */
+}
+
+html, body {
+  height: 100%; /* Ensure the body and html elements take full height */
+}
+
+/* Header Styling */
+header {
+  width: 100%;
+  background: #d32f2f;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: yellow;
+}
+
+.logo img {
+  height: 40px; /* Adjusted smaller height */
+  width: auto;
+  max-width: 120px; /* Prevents it from being too wide */
+  margin-left: 10px; /* Adds slight spacing from the edge */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Layout */
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center the content */
+  margin-top: 50px;
+  flex-grow: 1; /* Allow the main section to fill the available space */
+}
+
+.login-container {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 10px;
+  width: 45%; /* Make it slightly larger */
+  min-width: 300px;
+  text-align: left; /* Align text properly */
+}
+
+h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background: red;
+  color: yellow;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: darkred;
+}
+
+a {
+  display: block;
+  margin-top: 10px;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px;
+  flex-grow: 1;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+/* Image Section */
+.image-container {
+  width: 45%; /* Keep it balanced with the form */
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  max-width: 600px; /* Prevents it from being too large */
+  border-radius: 10px;
+}
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}

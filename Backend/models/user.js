@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true }, // Store hashed passwords
   hourlyWage: { type: Number, default: 0 },
   vehicleIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'vehicle' }],
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }]
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }],
+  //added for password reset
+  resetToken: { type: String },
+  resetTokenExpiry: { type: Date }
 });
 
 export default mongoose.model('user', UserSchema);
