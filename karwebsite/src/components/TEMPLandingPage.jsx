@@ -1,11 +1,11 @@
-// src/components/LandingPage.jsx
+// src/components/TEMPLandingPage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import TopBar from './TopBar';
-import './LandingPage.css';
+import './TEMPLandingPage.css';
 
-// each link will lead to the apprioriate dashboard
-const LandingPage = () => {
+// each link will lead to the appropriate dashboard
+const TEMPLandingPage = () => {
     return (
         <div className="landing-page">
             <TopBar />
@@ -19,8 +19,11 @@ const LandingPage = () => {
             <Link to="/customer" className="landing-link">
                 CUSTOMER DASHBOARD
             </Link>
+            <Link to="/home" className="landing-link">
+                HOME PAGE
+            </Link>
         </div>
     );
 };
 
-export default LandingPage;
+export default TEMPLandingPage;

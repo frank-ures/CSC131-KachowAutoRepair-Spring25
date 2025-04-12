@@ -1,0 +1,32 @@
+/* src/components/ScheduleAppointmentButton.css */
+@font-face {
+    font-family: 'Built Titling';
+    src: url('built_titling_rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.schedule-appointment-btn {
+    font-family: 'Built Titling', sans-serif;
+    background-color: #DE1E29;
+    color: #F6DF21;
+    text-decoration: none;
+    padding: 12px 24px;
+    font-size: 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    top: 750px;
+    position: absolute;
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 2;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.schedule-appointment-btn:hover {
+    background-color: #c41e25;
+    color: #ffd72c;
+}

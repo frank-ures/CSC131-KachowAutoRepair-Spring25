@@ -1,0 +1,13 @@
+/* src/layouts/HomeLayout.css */
+.home-layout {
+    width: 1440px;
+    min-height: 1024px;
+    margin: 0 auto;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* keeps the background image static */
+    z-index: 0;
+
+}
