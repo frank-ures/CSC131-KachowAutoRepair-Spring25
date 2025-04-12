@@ -6,6 +6,7 @@ const CustomerOverview = () => {
         <div className="content-section">
             <h1 className="page-title">Overview</h1>
             <p>Add overview content later</p>
+            <p>Current Appointment Progress</p>
         </div>
     );
 };

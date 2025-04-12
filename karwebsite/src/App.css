@@ -2,6 +2,46 @@
 /*
 organize and optimize in next sprints
  */
+
+
+ /* New styles for updated EmployeeSchedule component */
+.schedule-item {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr 1fr auto;
+  gap: 10px;
+  background: #ffffff;
+  color: #000000;
+  margin: 10px 0;
+  padding: 15px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-left: 4px solid #DE1E29;
+}
+
+.schedule-time {
+  font-size: 20px;
+  font-weight: bold;
+  color: #DE1E29;
+}
+
+.schedule-details {
+  font-size: 18px;
+  color: #555;
+}
+
+.loading-message, .error-message {
+  font-size: 24px;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-message {
+  color: #DE1E29;
+}
+
+
+
 @font-face {
   font-family: 'Built Titling';
   src: url('components/built_titling_rg.otf') format('opentype');
