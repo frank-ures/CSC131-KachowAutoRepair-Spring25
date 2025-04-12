@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kachow Auto Repair</title>
+    <link rel="stylesheet" href="aboutUs.css">
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="/Frontend/public/images/logo.png" alt="Kachow Auto Repair Logo">
+        <p>Kachow Auto Repair</p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="aboutUs.html">About Us</a></li>
+          <li><a href="#">Reviews</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <section class="hero">
+          <img src="/Frontend/public/images/vintageCar.png" alt="Vintage Car in Garage">
+          <h1>ABOUT US</h1>
+        </section>
+    
+        <section class="intro">
+          <h2>Welcome to Kachow Automotive Repair (KAR)!</h2>
+          <p>At Kachow Automotive Repair (KAR), we pride ourselves on delivering fast, reliable, and professional automotive services.
+             With a team of experienced mechanics and a focus on customer satisfaction, our goal is to keep your vehicle running smoothly and safely.
+            Whether it’s routine maintenance, diagnostics, or complex repairs, you can count on us to get the job done right.
+          </p>
+          <img src="/Frontend/public/images/pawnStarsGroup.jpg" alt="KAR Team">
+        </section>
+    
+        <section class="mission-story">
+          <div class="mission">
+            <h3>Our Mission</h3>
+            <p> Our mission at KAR is to provide exceptional automotive repair services with a focus on transparency, efficiency, and trust.
+                 We strive to make auto repairs simple and stress-free, ensuring that every customer leaves our shop fully satisfied and confident in the service they received.    
+            </p>
+          </div>
+          <div class="story">
+            <h3>Our Story</h3>
+            <p>
+                Kachow Automotive Repair was founded with a passion for cars and a commitment to delivering honest, high-quality repair services. Over the years, we have built a reputation for excellence by combining state-of-the-art diagnostic tools with a customer-first approach. Located conveniently in Sacramento, California, our team is dedicated to providing the best service experience possible.
+            </p>
+          </div>
+        </section>
+    
+        <section class="mechanics-working">
+          <img src="/Frontend/public/images/engine.png" alt="Mechanics Working on Engine">
+        </section>
+    
+        <section class="team">
+          <h3>Meet Our Team</h3>
+          <div class="team-members">
+            <div class="member">
+              <img src="/Frontend/public/images/rick.png" alt="Rick Harrison">
+              <p><strong>Rick Harrison</strong><br></p>
+            </div>
+            <div class="member">
+              <img src="/Frontend/public/images/codey.png" alt="Codey Harrison">
+              <p><strong>Codey Harrison</strong><br></p>
+            </div>
+            <div class="member">
+              <img src="/Frontend/public/images/austin.png" alt="Austin Russel">
+              <p><strong>Austin Russel</strong><br></p>
+            </div>
+            <div class="member">
+              <img src="/Frontend/public/images/richard.png" alt="Richard Benjamin">
+              <p><strong>Richard Benjamin</strong><br></p>
+            </div>
+            <div class="member">
+              <img src="/Frontend/public/images/wade.png" alt="Wade Warren">
+              <p><strong>Wade Warren</strong><br></p>
+            </div>
+            <div class="member">
+              <img src="/Frontend/public/images/robert.png" alt="Robert Fox">
+              <p><strong>Robert Fox</strong><br></p>
+            </div>
+          </div>
+        </section>
+    
+        <section class="why-choose">
+          <h3>Why Choose Us?</h3>
+          <p>•	Expert Mechanics: Highly trained and certified professionals.</p>
+          <p>•	Transparent Pricing: Clear and honest estimates with no surprises.</p>
+          <p>•	Customer-Centric Service: Friendly and personalized approach.</p>
+          <p>•	Advanced Technology: Modern diagnostic tools for accurate results.</p>
+          
+        </section>
+    
+        <section class="location">
+          <h3>Our Location</h3>
+          <p>Kachow Automotive Repair (KAR)</p>
+          <p>6000 J Street</p>
+          <p>Sacramento, CA, 95819</p>
+          <p>United States</p>
+        </section>
+        <div class="contact-wrapper">
+          <div class="map">
+            <img src="/Frontend/public/images/minimap.png" alt="KAR Location Map">
+          </div>
+      
+          <div class="contact-form">
+            <h2>CONTACT US</h2>
+      
+            <form id="contactForm" novalidate>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Type here..." required
+                     pattern="^[a-zA-Z\s]+$" title="Name should only contain letters and spaces.">
+            
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Type here..." required
+                     title="Please enter a valid email address.">
+            
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="Type here..." required
+                     pattern="^\d{10}$" title="Please enter a 10-digit phone number (numbers only).">
+            
+              <label for="comments">Comments</label>
+              <textarea id="comments" name="comments" placeholder="Type here..." rows="5"
+                        minlength="5" maxlength="500" required></textarea>
+            
+              <button type="submit">SUBMIT</button>
+            </form>
+          </div>
+        </div>
+      
+        <div class="cta-bar">
+          <p>WHAT ARE YOU WAITING FOR? SCHEDULE YOUR APPOINTMENT TODAY!</p>
+          <button>SCHEDULE APPOINTMENT</button>
+        </div>
+      </main>
+    <script src="aboutUs.js"></script>
+  </body>
+</html>
