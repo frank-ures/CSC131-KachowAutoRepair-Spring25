@@ -70,7 +70,7 @@ html, body {
 }
 
 .top-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -521,4 +521,9 @@ html, body {
   color: #ffffff;
   text-align: center;
   padding: 20px;
+}
+
+.the-boys-image {
+  display: block;
+  margin: 0 auto;
 }

@@ -1,0 +1,44 @@
+/* src/components/homeCustomerReview.css */
+
+.review-container {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Built Titling', sans-serif;
+}
+
+.review-img-wrapper {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.review-img {
+    width: 195px;
+    height: 195px;
+    object-fit: cover;
+}
+
+.review-box {
+    background-color: #DE1E29;
+    border-radius: 12px;
+    color: #fff;
+    padding: 80px 20px 20px;
+    margin-top: 80px;
+}
+
+.review-text {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.review-name {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.review-stars {
+    text-align: center;
+}
