@@ -10,6 +10,7 @@ import customer1 from '../../components/customer1.png';
 import customer2 from '../../components/customer2.png';
 import customer3 from '../../components/customer3.png';
 import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const LandingPage = () => {
     return (
@@ -60,6 +61,7 @@ const LandingPage = () => {
 
                 <div style={{ height: '150px' }}></div>
                 <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
     );

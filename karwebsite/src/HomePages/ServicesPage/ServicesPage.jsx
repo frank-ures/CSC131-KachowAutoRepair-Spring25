@@ -6,6 +6,7 @@ import BlackBox from '../../components/BlackBox';
 import ScheduleAppointmentButton from "../../components/ScheduleAppointmentButton";
 import BlackBoxHeader from "../../components/BlackBoxHeader";
 import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const ServicesPage = () => {
     return (
@@ -119,6 +120,7 @@ const ServicesPage = () => {
 
                 <div style={{ height: '150px' }}></div>
                 <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
     );

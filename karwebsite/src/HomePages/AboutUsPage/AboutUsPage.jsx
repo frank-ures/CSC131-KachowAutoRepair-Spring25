@@ -15,6 +15,7 @@ import WadeImg from '../../components/Wade.png';
 import RobertImg from '../../components/Robert.png';
 import AboutUsBox from "../../components/AboutUsBox";
 import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const AboutUsPage = () => {
     return (
@@ -93,6 +94,7 @@ const AboutUsPage = () => {
 
                 <div style={{ height: '150px' }}></div>
                 <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
         
