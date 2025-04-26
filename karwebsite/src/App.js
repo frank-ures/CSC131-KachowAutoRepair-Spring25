@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
+import { useAuth } from './context/AuthContext'; // Import the AuthProvider
 
 // Dashboard components
 import EmployeeDashboard from './dashboards/EmployeeDashboard/EmployeeDashboard';
@@ -14,7 +15,7 @@ import TEMPLandingPage from "./components/TEMPLandingPage";
 import ServicesPage from './HomePages/ServicesPage/ServicesPage';
 import AboutUsPage from "./HomePages/AboutUsPage/AboutUsPage";
 import ReviewsPage from "./HomePages/ReviewsPage/ReviewsPage";
-import Login from './components/Login'; // You'll need to create this component
+import Login from './components/Login';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';

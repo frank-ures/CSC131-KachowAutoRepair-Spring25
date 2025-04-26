@@ -1,8 +1,7 @@
 // frontend/src/context/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 
-// API base URL - change this to match your backend
-const API_BASE_URL = 'http://localhost:5999/api';
+const API_BASE_URL = 'http://localhost:5999';
 
 export const AuthContext = createContext();
 
@@ -23,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         }
         
         // Fetch user profile using the token
-        const response = await fetch(`${API_BASE_URL}/profile`, {
+        const response = await fetch(`${API_BASE_URL}/api/profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -53,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null);
       setIsLoading(true);
       
-      const response = await fetch(`${API_BASE_URL}/login`, {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -71,7 +70,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', data.token);
       
       // Fetch user profile
-      const profileResponse = await fetch(`${API_BASE_URL}/profile`, {
+      const profileResponse = await fetch(`${API_BASE_URL}/api/profile`, {
         headers: {
           'Authorization': `Bearer ${data.token}`
         }
@@ -107,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
   // Function to make authenticated API calls
   const authFetch = async (endpoint, options = {}) => {
-    const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+    const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}/api/${endpoint}`;
     
     const defaultOptions = {
       headers: {
@@ -149,7 +148,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook for easy access to auth context
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (context === undefined) {

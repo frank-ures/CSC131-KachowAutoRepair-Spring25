@@ -13,13 +13,62 @@ styling for payroll widget
     display: flex;
     flex-direction: column;
     gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .payroll-date {
     font-size: 36px;
     text-align: center;
-    cursor: pointer;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.payroll-date input[type="date"] {
+    font-size: 18px;
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    color: #333;
+    font-family: inherit;
+    cursor: pointer;
+    max-width: 180px;
+}
+  
+.payroll-date input[type="date"]:focus {
+    outline: none;
+    border-color: #DE1E29;
+    box-shadow: 0 0 0 2px rgba(222, 30, 41, 0.2);
+}
+
+.fetch-shifts-btn {
+    padding: 10px 20px;
+    background-color: #DE1E29;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-left: 10px;
+}
+  
+.fetch-shifts-btn:hover {
+    background-color: #c51923;
+}
+  
+.fetch-shifts-btn:active {
+    transform: scale(0.98);
+}
+  
+.fetch-shifts-btn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
 }
 
 .payroll-content {
@@ -37,6 +86,14 @@ styling for payroll widget
 
 .progress-ring {
     transform: rotate(-90deg);
+}
+
+.progress-ring__background {
+    stroke: #eee;
+}
+  
+.progress-ring__progress {
+    transition: stroke-dashoffset 0.5s ease;
 }
 
 .ring-text {
@@ -60,14 +117,38 @@ styling for payroll widget
 }
 
 .payroll-data-label {
-    font-size: 48px;
+    font-size: 18px;
     font-weight: bold;
-    color: #000;
+    color: #777;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .payroll-data-value {
     font-size: 32px;
-    color: #777;
+    color: #000;
     margin-top: 5px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .payroll-widget {
+      padding: 30px 20px;
+    }
+    
+    .payroll-content {
+      flex-direction: column;
+    }
+    
+    .payroll-date {
+      font-size: 24px;
+    }
+    
+    .payroll-data-label {
+      font-size: 16px;
+    }
+    
+    .payroll-data-value {
+      font-size: 24px;
+    }
 }

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/userRoutes.js";
+import shiftRoutes from './routes/shiftRoutes.js';
+import appointmentRoutes from './routes/appointmentRoutes.js';
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
@@ -18,16 +20,14 @@ const mongoUri = process.env.MONGO_URI;
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
-// app.use(cors({
-//   origin: 'http://localhost:3000'
-// }));
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true // Allow cookies if needed
 }));
 app.use('/auth', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', shiftRoutes);
+app.use('/api', appointmentRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()
@@ -91,9 +91,6 @@ connectDB()
 app.get("/", (req, res) => {
   res.send("Server is working");
 });
-
-// Mount authentication routes
-app.use("/auth", authRoutes);
 
 // API endpoint to get appointments
 app.get("/api/appointments", async (req, res) => {
