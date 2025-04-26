@@ -62,11 +62,29 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Generate JWT token
-        const token = jwt.sign({ userId: user._id, role: user.role },
-            process.env.JWT_SECRET, { expiresIn: '1h' });
+        // MIGHT REMOVE LATER - THIS WAS FOR ADDING NAME TO CUSTOMER REVIEWS
+        // IF BETTER ALTERNATIVE COMES LATER, THAT WILL BE IMPLEMENTED
+        // JWT payload
+        const payload = {
+            userId: user._id,
+            role: user.role,
+            firstName: user.firstName, // Add first name
+            lastName: user.lastName,   // Add last name
+            email: user.email          // Add email (optional?)
+        };
 
+        // Generate JWT token with the enhanced payload
+        const token = jwt.sign(
+            payload,                    // use the payload object containing user details
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' } // adjust the expiration time?
+        );
+
+        // Send back just the token. The client will decode it.
         res.json({ token });
+
+        //  END ADDITION ------------------------------------------------------
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });

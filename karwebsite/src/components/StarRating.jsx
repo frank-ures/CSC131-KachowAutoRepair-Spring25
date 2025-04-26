@@ -1,7 +1,9 @@
 // src/components/StarRating.jsx
+// StarRating component that displays 5 stars with a default rating of 5
 import React from 'react';
 
-const StarRating = ({ rating, setRating }) => {
+const StarRating = ({rating = 5, setRating}) => {
+    rating = rating || 5;
     const maxStars = 5;
 
     const handleClick = (starValue) => {
@@ -19,7 +21,7 @@ const StarRating = ({ rating, setRating }) => {
                         style={{
                             cursor: 'pointer',
                             marginRight: '8px',
-                            color: starValue <= rating ? '#F6DF21' : '#555'
+                            color: starValue <= (rating || 5) ? '#F6DF21' : '#555'
                         }}
                     >
             ★
