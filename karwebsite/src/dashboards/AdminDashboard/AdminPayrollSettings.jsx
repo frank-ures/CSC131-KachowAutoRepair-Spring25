@@ -6,16 +6,20 @@ const AdminPayrollSettings =  () => {
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const response = await fetch('/api/employees');
+                const response = await fetch('http://localhost:5999/api/employees');
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                  throw new Error("Response is not JSON");
+                }
                 if (!response.ok) {
-                    throw new Error('Failed to fetch employee list');
+                  throw new Error(`Failed with status: ${response.status}`);
                 }
                 const data = await response.json();
                 setEmployeeList(data);
-            } catch (error) {
+              } catch (error) {
                 console.error(error);
-                alert('Error fetching employee list.')
-            }
+                alert('Error fetching employee list.');
+              }
         };
         fetchEmployees();
     }, []);
@@ -34,7 +38,7 @@ const AdminPayrollSettings =  () => {
                 };
     
                 try {
-                    const response = await fetch(`/api/employee/${updatedEmployee._id}`, {
+                    const response = await fetch(`http://localhost:5999/api/employee/${updatedEmployee._id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',

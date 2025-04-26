@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/userRoutes.js";
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
@@ -16,8 +17,13 @@ const mongoUri = process.env.MONGO_URI;
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 app.use('/auth', authRoutes);
+app.use('/api', userRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()
