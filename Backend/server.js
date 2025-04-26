@@ -7,6 +7,7 @@ import cors from "cors";
 import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
 import fetch from 'node-fetch';
+import reviewRoutes from "./routes/reviews.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const mongoUri = process.env.MONGO_URI;
 app.use(express.json());
 app.use(cors());
 app.use('/auth', authRoutes);
+app.use('/reviews', reviewRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()
@@ -313,4 +315,6 @@ app.get('/api/appointments/history', async (req, res) => {
       console.log("MongoDB connection closed after history fetch");
     }
   }
+
+
 });
