@@ -1,7 +1,9 @@
 // src/dashboards/CustomerDashboard/CustomerSidebar.jsx
 import React from 'react';
+import { useAuth } from "../../context/AuthContext";
 
 const CustomerSidebar = ({ activeSection, setActiveSection, firstName }) => {
+    const { currentUser, authFetch } = useAuth();
     const navItems = [
         'Overview',
         'Schedule An Appointment',
@@ -13,7 +15,7 @@ const CustomerSidebar = ({ activeSection, setActiveSection, firstName }) => {
 
     return (
         <aside className="sidebar">
-            <div className="greeting">Hi {firstName}!</div>
+            <div className="greeting">Hi {currentUser.firstName}!</div>
             <nav className="side-nav">
                 <ul>
                     {navItems.map((item) => (

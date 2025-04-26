@@ -1,7 +1,9 @@
 // src/dashboards/EmployeeDashboard/EmployeeSidebar.jsx
 import React from 'react';
+import { useAuth } from "../../context/AuthContext";
 
 const EmployeeSidebar = ({ activeSection, setActiveSection, firstName }) => {
+    const { currentUser, authFetch } = useAuth();
     const navItems = [
         'Overview',
         'Today’s Schedule',
@@ -12,7 +14,7 @@ const EmployeeSidebar = ({ activeSection, setActiveSection, firstName }) => {
 
     return (
         <aside className="sidebar">
-            <div className="greeting">Hi {firstName}!</div>
+            <div className="greeting">Hi {currentUser.firstName}!</div>
             <nav className="side-nav">
                 <ul>
                     {navItems.map((item) => (

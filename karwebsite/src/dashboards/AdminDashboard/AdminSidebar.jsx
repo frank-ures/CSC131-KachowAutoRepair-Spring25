@@ -1,7 +1,9 @@
 // src/dashboards/AdminDashboard/AdminSidebar.jsx
 import React from 'react';
+import { useAuth } from "../../context/AuthContext";
 
 const AdminSidebar = ({ activeSection, setActiveSection, firstName }) => {
+    const { currentUser, authFetch } = useAuth();
     const navItems = [
         'Overview',
         'Appointment List',
@@ -11,7 +13,7 @@ const AdminSidebar = ({ activeSection, setActiveSection, firstName }) => {
 
     return (
         <aside className="sidebar">
-            <div className="greeting">Hi {firstName}!</div>
+            <div className="greeting">Hi {currentUser.firstName}!</div>
             <nav className="side-nav">
                 <ul>
                     {navItems.map((item) => (
