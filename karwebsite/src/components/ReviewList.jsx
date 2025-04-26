@@ -29,10 +29,10 @@ const ReviewList = ({ reviews, page, setPage, reviewsPerPage }) => {
     };
 
     return (
-        <div style={{ color: '#fff', fontSize: '32px', lineHeight: 1.5 }}>
-            {displayedReviews.map((review, index) => (
-                <div key={index} style={{ marginBottom: '40px' }}>
-                    <div>
+        <div style={{color: '#fff', fontSize: '32px', lineHeight: 1.5, padding: '20px 0'}}>
+        {displayedReviews.map((review, index) => (
+            <div key={index} style={{marginBottom: '60px'}}>
+            <div>
                         {renderStars(review.rating)}
                     </div>
                     <p style={{ margin: '8px 0', fontSize: '32px' }}>
@@ -48,8 +48,8 @@ const ReviewList = ({ reviews, page, setPage, reviewsPerPage }) => {
                 </div>
             ))}
 
-            <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '24px' }}>
-                <button
+            <div style={{textAlign: 'center', margin: '32px 0', fontSize: '24px', padding: '20px'}}>
+            <button
                     disabled={page <= 1}
                     onClick={() => setPage(page - 1)}
                     style={{
@@ -81,10 +81,11 @@ const ReviewList = ({ reviews, page, setPage, reviewsPerPage }) => {
                     <img
                         src={rightArrowIcon}
                         alt="Next"
-                        style={{ width: '24px', opacity: page <= 1 ? 0.3 : 1, filter: 'invert(1)'}}
+                        style={{ width: '24px', opacity: page === totalPages ? 0.3 : 1, filter: 'invert(1)'}}
                     />
                 </button>
             </div>
+            
         </div>
     );
 };

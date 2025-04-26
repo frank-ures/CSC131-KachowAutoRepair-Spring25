@@ -10,6 +10,7 @@ import cors from "cors";
 import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
 import fetch from 'node-fetch';
+import reviewRoutes from "./routes/reviews.js";
 
 dotenv.config();
 
@@ -24,7 +25,9 @@ app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true // Allow cookies if needed
 }));
+// app.use(cors()); // commented out to resolve conflict
 app.use('/auth', authRoutes);
+app.use('/reviews', reviewRoutes);
 app.use('/api', userRoutes);
 app.use('/api', shiftRoutes);
 app.use('/api', appointmentRoutes);
