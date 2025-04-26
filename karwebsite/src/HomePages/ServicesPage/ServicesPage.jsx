@@ -5,6 +5,8 @@ import ServicePageBkgImg from '../../components/service-page-bkg-img.png';
 import BlackBox from '../../components/BlackBox';
 import ScheduleAppointmentButton from "../../components/ScheduleAppointmentButton";
 import BlackBoxHeader from "../../components/BlackBoxHeader";
+import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const ServicesPage = () => {
     return (
@@ -117,7 +119,8 @@ const ServicesPage = () => {
                 </div>
 
                 <div style={{ height: '150px' }}></div>
-                <p1> Insert contact us later </p1>
+                <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
     );

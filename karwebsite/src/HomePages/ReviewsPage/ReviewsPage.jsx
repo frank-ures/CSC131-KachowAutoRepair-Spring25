@@ -9,6 +9,8 @@ import LoginToMakeReviewButton from '../../components/LoginToMakeReviewButton';
 import ReviewRing from '../../components/ReviewRing';
 import RatingDistribution from '../../components/RatingDistribution';
 import ReviewList from '../../components/ReviewList';
+import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const distributionData = [
     { stars: 5, percentage: 55 },
@@ -44,6 +46,11 @@ const ReviewsPage = () => {
                     reviewsPerPage={3}
                 />
                 <LoginToMakeReviewButton />
+                {/*Fixes layout of button and contactus box*/}
+                <p>&emsp;</p>
+                <p>&emsp;</p>
+                <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
     );

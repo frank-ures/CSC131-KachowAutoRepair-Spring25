@@ -1,4 +1,4 @@
-// src/HomePages/LandingPage/LandingPage.jsx
+// src/HomePages/AboutUsPage/AboutUsPage.jsx
 import React from 'react';
 import HomeLayout from '../../components/HomeLayout';
 import AboutUsPageBkgImg from '../../components/aboutus-page-bkg-img.png';
@@ -14,8 +14,10 @@ import RichardImg from '../../components/Richard.png';
 import WadeImg from '../../components/Wade.png';
 import RobertImg from '../../components/Robert.png';
 import AboutUsBox from "../../components/AboutUsBox";
+import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
-const LandingPage = () => {
+const AboutUsPage = () => {
     return (
         <HomeLayout bgImage={AboutUsPageBkgImg}>
             <BlackBoxHeader>
@@ -28,7 +30,7 @@ const LandingPage = () => {
                     At Kachow Automotive Repair (KAR), we pride ourselves on delivering fast, reliable,
                     and professional automotive services. With a team of experienced mechanics and a focus
                     on customer satisfaction, our goal is to keep your vehicle running smoothly and safely.
-                    Whether it’s routine maintenance, diagnostics, or complex repairs, you can count on us
+                    Whether it's routine maintenance, diagnostics, or complex repairs, you can count on us
                     to get the job done right.
                 </p>
                 <img src={TheBoysImg} alt="The Boys" className="the-boys-image" />
@@ -91,10 +93,12 @@ const LandingPage = () => {
                 </div>
 
                 <div style={{ height: '150px' }}></div>
-                <p1> Insert contact us later </p1>
+                <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
+        
     );
 };
 
-export default LandingPage;
+export default AboutUsPage;

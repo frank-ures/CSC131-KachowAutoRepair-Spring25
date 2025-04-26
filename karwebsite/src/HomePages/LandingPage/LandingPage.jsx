@@ -9,6 +9,8 @@ import HomeCustomerReview from '../../components/homeCustomerReview';
 import customer1 from '../../components/customer1.png';
 import customer2 from '../../components/customer2.png';
 import customer3 from '../../components/customer3.png';
+import ContactUsBox from '../../components/ContactUsBox';
+import Footer from '../../components/Footer';
 
 const LandingPage = () => {
     return (
@@ -58,7 +60,8 @@ const LandingPage = () => {
                 </div>
 
                 <div style={{ height: '150px' }}></div>
-                <p1> Insert contact us later </p1>
+                <ContactUsBox/>
+                <Footer/>
             </BlackBox>
         </HomeLayout>
     );

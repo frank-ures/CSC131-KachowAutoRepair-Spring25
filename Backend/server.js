@@ -102,16 +102,8 @@ app.get("/api/appointments", async (req, res) => {
     const db = mongoClient.db("calendarDB");
     const collection = db.collection("events");
     
-    // Get current date at midnight for filtering today's appointments
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    console.log("Querying appointments from:", today.toISOString());
-    
-    // Query appointments for today and future
-    const appointments = await collection.find({
-      start_time: { $gte: today.toISOString() }
-    }).sort({ start_time: 1 }).toArray();
+    // gets all appointments then filters by date in frontend for displaying
+    const appointments = await collection.find({}).sort({ start_time: 1 }).toArray();
     
     console.log("Found appointments:", appointments.length);
     
@@ -125,6 +117,7 @@ app.get("/api/appointments", async (req, res) => {
       console.log("MongoDB connection closed");
     }
   }
+
 });
 
 //------------ Calendly Webhook Handler ------------
@@ -190,4 +183,140 @@ app.post("/webhook/calendly", async (req, res) => {
   }
 });
 
+// Endpoint to start an appointment
+app.post("/api/appointments/start", async (req, res) => {
+  let mongoClient;
+  try {
+    const { appointmentId, status } = req.body;
+    
+    if (!appointmentId) {
+      return res.status(400).send("Appointment ID is required");
+    }
+    
+    mongoClient = new MongoClient(mongoUri);
+    await mongoClient.connect();
+    
+    const db = mongoClient.db("calendarDB");
+    const collection = db.collection("events");
+    
+    // Update the appointment with the new status
+    const result = await collection.updateOne(
+      { _id: new mongoose.Types.ObjectId(appointmentId) },
+      { $set: { status: status, started_at: new Date().toISOString() } }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).send("Appointment not found");
+    }
+    
+    console.log(`Appointment ${appointmentId} updated to status: ${status}`);
+    res.status(200).json({ message: "Appointment status updated successfully" });
+  } catch (error) {
+    console.error("Error updating appointment status:", error);
+    res.status(500).send("Error updating appointment status");
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+    }
+  }
+});
 
+// Endpoint to complete an appointment
+app.post("/api/appointments/complete", async (req, res) => {
+  let mongoClient;
+  try {
+    const { appointmentId, status } = req.body;
+    
+    if (!appointmentId) {
+      return res.status(400).send("Appointment ID is required");
+    }
+    
+    mongoClient = new MongoClient(mongoUri);
+    await mongoClient.connect();
+    
+    const db = mongoClient.db("calendarDB");
+    const collection = db.collection("events");
+    
+    // Update the appointment with the new status
+    const result = await collection.updateOne(
+      { _id: new mongoose.Types.ObjectId(appointmentId) },
+      { $set: { status: status, completed_at: new Date().toISOString() } }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).send("Appointment not found");
+    }
+    
+    console.log(`Appointment ${appointmentId} updated to status: ${status}`);
+    res.status(200).json({ message: "Appointment status updated successfully" });
+  } catch (error) {
+    console.error("Error updating appointment status:", error);
+    res.status(500).send("Error updating appointment status");
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+    }
+  }
+});
+
+// Endpoint to get current in-progress appointment for customer overview
+app.get("/api/appointments/current", async (req, res) => {
+  let mongoClient;
+  try {
+    mongoClient = new MongoClient(mongoUri);
+    await mongoClient.connect();
+    
+    const db = mongoClient.db("calendarDB");
+    const collection = db.collection("events");
+    
+    // Find the current in-progress appointment
+    const currentAppointment = await collection.findOne({ status: "in_progress" });
+    
+    if (!currentAppointment) {
+      return res.status(200).json({ message: "No appointment currently in progress" });
+    }
+    
+    res.status(200).json(currentAppointment);
+  } catch (error) {
+    console.error("Error fetching current appointment:", error);
+    res.status(500).send("Error fetching current appointment");
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+    }
+  }
+});
+
+app.get('/api/appointments/history', async (req, res) => {
+  let mongoClient;
+  try {
+    const { email } = req.query;
+    
+    if (!email) {
+      return res.status(400).json({ error: 'Email parameter is required' });
+    }
+    
+    mongoClient = new MongoClient(mongoUri);
+    await mongoClient.connect();
+    console.log("Connected to MongoDB for fetching appointment history");
+    
+    const db = mongoClient.db("calendarDB");
+    const collection = db.collection("events");
+    
+    // Find all appointments for this customer email
+    const appointments = await collection.find({ 
+      invitee_email: email 
+    }).sort({ start_time: -1 }).toArray(); // Sort by start time, newest first
+    
+    console.log(`Found ${appointments.length} appointments for email: ${email}`);
+    res.json(appointments);
+  } catch (error) {
+    console.error('Error fetching customer appointment history:', error);
+    res.status(500).json({ error: 'Failed to fetch appointment history' });
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+      console.log("MongoDB connection closed after history fetch");
+    }
+  }
+});
