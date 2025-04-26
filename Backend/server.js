@@ -19,8 +19,12 @@ const mongoUri = process.env.MONGO_URI;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
+// app.use(cors({
+//   origin: 'http://localhost:3000'
+// }));
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000',
+  credentials: true // Allow cookies if needed
 }));
 app.use('/auth', authRoutes);
 app.use('/api', userRoutes);
