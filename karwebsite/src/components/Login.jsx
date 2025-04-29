@@ -43,7 +43,6 @@ const LoginPage = () => {
         console.log("Login successful:", data);
         // Store token in localStorage
         localStorage.setItem('token', data.token);
-        
         // Redirect based on role if provided
         if (data.role === 'admin') {
           navigate('/admin');

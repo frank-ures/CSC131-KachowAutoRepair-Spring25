@@ -79,9 +79,9 @@ router.post('/login', async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '1h' } // adjust the expiration time?
         );
-
+        const role = user.role;
         // Send back just the token. The client will decode it.
-        res.json({ token });
+        res.json({ role, token });
 
         //  END ADDITION ------------------------------------------------------
 
