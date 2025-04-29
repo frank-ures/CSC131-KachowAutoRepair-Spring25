@@ -27,7 +27,6 @@ const AdminSidebar = ({ activeSection, setActiveSection, firstName }) => {
                     ))}
                 </ul>
             </nav>
-            <div className="logout">Log out</div>
         </aside>
     );
 };

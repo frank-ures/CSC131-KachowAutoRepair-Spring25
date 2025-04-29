@@ -52,7 +52,8 @@ function App() {
           <Route path="/role-router" element={<RoleRouter />} />
           
           {/* Temporary landing page - can redirect to login if not authenticated */}
-          <Route path="/" element={<TEMPLandingPage />} />
+          <Route path="/" element={<LandingPage />} />
+          {/* <Route path="/" element={<TEMPLandingPage />} /> */}
           
           {/* Protected Dashboard routes */}
           <Route element={<PrivateRoute roleRequired="mechanic" />}>
