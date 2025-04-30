@@ -88,9 +88,6 @@ const AdminPayrollSettings = () => {
     <div className="content-section">
       <h1 className="page-title">Payroll Settings</h1>
       <div className="admin-info">
-        <p>
-          Logged in as: {currentUser?.firstName} {currentUser?.lastName} (Admin)
-        </p>
       </div>
 
       <div className="employee-list-container">

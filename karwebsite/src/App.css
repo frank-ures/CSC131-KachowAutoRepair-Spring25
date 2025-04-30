@@ -687,12 +687,108 @@ html, body {
   background: #c41e25;
 }
 
+.employee-add {
+  flex: 0 0 30%;
+  /* text-align: right; */
+}
+
+.employee-add button {
+  font-size: 18px;
+  font-family: 'Built Titling', serif;
+  padding: 5px 10px;
+  background: #DE1E29;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.employee-add button:hover {
+  background: #c41e25;
+}
+
 .employee-wage {
   font-size: 24px;
 }
 
 .wage-amount {
   color: #777;
+}
+
+.employee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-employee-button {
+  background-color: #DE1E29;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-employee-button:hover {
+  background-color: #c51923;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: center;
+  color: black;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 50%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: white;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-buttons button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-buttons button[type="button"] {
+  background-color: #444;
+  color: white;
+  border: none;
+}
+
+.form-buttons button[type="submit"] {
+  background-color: #DE1E29;
+  color: white;
+  border: none;
 }
 
 .appointment-item {
@@ -921,6 +1017,7 @@ html, body {
 }
 
 .modal-header {
+  color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;
