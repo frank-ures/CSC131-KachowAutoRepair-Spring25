@@ -56,5 +56,21 @@ router.get('/employees', async (req, res) => {
     }
 });
 
+router.delete('/employee/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedUser = await User.findByIdAndDelete( id );
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json(deletedUser);
+    } catch (err) {
+        console.error('PUT /employee/:id error:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 export default router;
 
