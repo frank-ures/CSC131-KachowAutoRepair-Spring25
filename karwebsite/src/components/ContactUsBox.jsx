@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ContactUsBox.css';
+import './ScheduleAppointmentButton'
+import ScheduleAppointmentButton from "./ScheduleAppointmentButton";
+import karLogo from './kar-logo.png'
 
 const ContactUsBox = () => {
   const [formData, setFormData] = useState({
@@ -72,14 +75,13 @@ const ContactUsBox = () => {
       const customIcon = window.L.divIcon({
         className: 'custom-map-marker',
         html: `
-          <div class="marker-container">
-            <div class="marker-title">KAR</div>
-            <div class="marker-subtitle">SERVICE CENTER</div>
-            <div class="marker-icon">⚡</div>
-          </div>
+          <img src="${karLogo}" 
+            style="width:40px; height:40px;" 
+            alt="KAR Service Center" 
+          />
         `,
         iconSize: [40, 40],
-        iconAnchor: [20, 40]
+        iconAnchor: [20, 10]
       });
       
       // Add the marker
@@ -257,9 +259,9 @@ const ContactUsBox = () => {
       
       <div className="appointment-section">
         <h3 className="appointment-text">WHAT ARE YOU WAITING FOR? SCHEDULE YOUR APPOINTMENT TODAY!</h3>
-        <button onClick={scheduleAppointment} className="appointment-button">
-          SCHEDULE APPOINTMENT
-        </button>
+        <div className="contact-us-wrapper">
+          <ScheduleAppointmentButton className="schedule-appointment-btn" />
+        </div>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const Footer = () => {
             <li><a href="/services">SERVICES</a></li>
             <li><a href="/about">ABOUT US</a></li>
             <li><a href="/reviews">REVIEWS</a></li>
-            <li><a href="/login">LOGIN</a></li>
+            <li><a href="/karwebsite/src/HomePages/Login">LOGIN</a></li>
             <li><a href="/register">REGISTER</a></li>
           </ul>
         </div>
