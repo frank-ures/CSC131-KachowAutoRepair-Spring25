@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import loginBkgImg from '../components/login-bkg-img.jpg'
-import './Login.css';
+import '../components/Login.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
