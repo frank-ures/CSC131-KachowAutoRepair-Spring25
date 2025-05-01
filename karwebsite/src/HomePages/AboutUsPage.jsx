@@ -1,21 +1,21 @@
 // src/HomePages/AboutUsPage/AboutUsPage.jsx
 import React from 'react';
-import HomeLayout from '../../components/HomeLayout';
-import AboutUsPageBkgImg from '../../components/aboutus-page-bkg-img.png';
-import BlackBox from '../../components/BlackBox';
-import ScheduleAppointmentButton from "../../components/ScheduleAppointmentButton";
-import BlackBoxHeader from "../../components/BlackBoxHeader";
-import TheBoysImg from '../../components/the-boys.png';
-import HandsImg from '../../components/hands.png';
-import RickImg from '../../components/Rick.png';
-import CodeyImg from '../../components/Codey.png';
-import AustinImg from '../../components/Austin.png';
-import RichardImg from '../../components/Richard.png';
-import WadeImg from '../../components/Wade.png';
-import RobertImg from '../../components/Robert.png';
-import AboutUsBox from "../../components/AboutUsBox";
-import ContactUsBox from '../../components/ContactUsBox';
-import Footer from '../../components/Footer';
+import HomeLayout from '../components/HomeLayout';
+import AboutUsPageBkgImg from '../components/aboutus-page-bkg-img.png';
+import BlackBox from '../components/BlackBox';
+import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
+import BlackBoxHeader from "../components/BlackBoxHeader";
+import TheBoysImg from '../components/the-boys.png';
+import HandsImg from '../components/hands.png';
+import RickImg from '../components/Rick.png';
+import CodeyImg from '../components/Codey.png';
+import AustinImg from '../components/Austin.png';
+import RichardImg from '../components/Richard.png';
+import WadeImg from '../components/Wade.png';
+import RobertImg from '../components/Robert.png';
+import AboutUsBox from "../components/AboutUsBox";
+import ContactUsBox from '../components/ContactUsBox';
+import Footer from '../components/Footer';
 
 const AboutUsPage = () => {
     return (

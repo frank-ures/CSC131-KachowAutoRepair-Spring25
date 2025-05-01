@@ -1,12 +1,12 @@
 // src/HomePages/ServicesPage/ServicesPage.jsx
 import React from 'react';
-import HomeLayout from '../../components/HomeLayout';
-import ServicePageBkgImg from '../../components/service-page-bkg-img.png';
-import BlackBox from '../../components/BlackBox';
-import ScheduleAppointmentButton from "../../components/ScheduleAppointmentButton";
-import BlackBoxHeader from "../../components/BlackBoxHeader";
-import ContactUsBox from '../../components/ContactUsBox';
-import Footer from '../../components/Footer';
+import HomeLayout from '../components/HomeLayout';
+import ServicePageBkgImg from '../components/service-page-bkg-img.png';
+import BlackBox from '../components/BlackBox';
+import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
+import BlackBoxHeader from "../components/BlackBoxHeader";
+import ContactUsBox from '../components/ContactUsBox';
+import Footer from '../components/Footer';
 
 const ServicesPage = () => {
     return (

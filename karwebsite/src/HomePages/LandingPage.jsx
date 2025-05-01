@@ -1,16 +1,16 @@
 // src/HomePages/LandingPage/LandingPage.jsx
 import React from 'react';
-import HomeLayout from '../../components/HomeLayout';
-import homePageBkgImg from '../../components/home-page-bkg-img.png';
-import BlackBox from '../../components/BlackBox';
-import ScheduleAppointmentButton from "../../components/ScheduleAppointmentButton";
-import theOwner from '../../components/the-owner.png';
-import HomeCustomerReview from '../../components/homeCustomerReview';
-import customer1 from '../../components/customer1.png';
-import customer2 from '../../components/customer2.png';
-import customer3 from '../../components/customer3.png';
-import ContactUsBox from '../../components/ContactUsBox';
-import Footer from '../../components/Footer';
+import HomeLayout from '../components/HomeLayout';
+import homePageBkgImg from '../components/home-page-bkg-img.png';
+import BlackBox from '../components/BlackBox';
+import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
+import theOwner from '../components/the-owner.png';
+import HomeCustomerReview from '../components/homeCustomerReview';
+import customer1 from '../components/customer1.png';
+import customer2 from '../components/customer2.png';
+import customer3 from '../components/customer3.png';
+import ContactUsBox from '../components/ContactUsBox';
+import Footer from '../components/Footer';
 
 const LandingPage = () => {
     return (

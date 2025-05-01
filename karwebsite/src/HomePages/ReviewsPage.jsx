@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import HomeLayout from '../../components/HomeLayout';
-import ReviewsPageBkgImg from '../../components/reviews-page-bkg-img.png';
-import BlackBox from '../../components/BlackBox';
-import ScheduleAppointmentButton from '../../components/ScheduleAppointmentButton';
-import BlackBoxHeader from '../../components/BlackBoxHeader';
-import LoginToMakeReviewButton from '../../components/LoginToMakeReviewButton';
-import ReviewRing from '../../components/ReviewRing';
-import RatingDistribution from '../../components/RatingDistribution';
-import ReviewList from '../../components/ReviewList';
-import ContactUsBox from '../../components/ContactUsBox';
-import Footer from '../../components/Footer';
+import HomeLayout from '../components/HomeLayout';
+import ReviewsPageBkgImg from '../components/reviews-page-bkg-img.png';
+import BlackBox from '../components/BlackBox';
+import ScheduleAppointmentButton from '../components/ScheduleAppointmentButton';
+import BlackBoxHeader from '../components/BlackBoxHeader';
+import LoginToMakeReviewButton from '../components/LoginToMakeReviewButton';
+import ReviewRing from '../components/ReviewRing';
+import RatingDistribution from '../components/RatingDistribution';
+import ReviewList from '../components/ReviewList';
+import ContactUsBox from '../components/ContactUsBox';
+import Footer from '../components/Footer';
 
 const ReviewsPage = () => {
     const [page, setPage] = useState(1);

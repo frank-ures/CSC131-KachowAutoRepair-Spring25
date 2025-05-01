@@ -10,12 +10,12 @@ import AdminDashboard from './dashboards/AdminDashboard/AdminDashboard';
 import CustomerDashboard from "./dashboards/CustomerDashboard/CustomerDashboard";
 
 // Public page components
-import LandingPage from './HomePages/LandingPage/LandingPage';
-import TEMPLandingPage from "./components/TEMPLandingPage";
-import ServicesPage from './HomePages/ServicesPage/ServicesPage';
-import AboutUsPage from "./HomePages/AboutUsPage/AboutUsPage";
-import ReviewsPage from "./HomePages/ReviewsPage/ReviewsPage";
-import Login from './components/Login';
+// import TEMPLandingPage from "./components/TEMPLandingPage";
+import LandingPage from './HomePages/LandingPage';
+import ServicesPage from './HomePages/ServicesPage';
+import AboutUsPage from "./HomePages/AboutUsPage";
+import ReviewsPage from "./HomePages/ReviewsPage";
+import Login from './HomePages/Login';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';

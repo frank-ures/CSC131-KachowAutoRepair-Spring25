@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
-import carGarage from './car-garage.jpg'
+import carGarage from '../components/car-garage.jpg'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
