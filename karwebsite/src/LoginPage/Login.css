@@ -1,0 +1,131 @@
+/* Login.css */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.login-header {
+    width: 100%;
+    background: #DE1E29;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: yellow;
+    height: 80px;
+    align-items: center;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.login-main {
+    display: flex;
+    height: calc(100vh - 80px);
+    padding: 0;
+    margin-top: 0;
+}
+
+.login-container-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Form container */
+.login-form-container {
+    background: #000000;
+    padding: 40px 7%;
+    width: 50%;
+    min-width: 300px;
+    text-align: left;
+}
+
+.login-form-container h2 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 64px;
+}
+
+.login-form-container p {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+/* Form elements */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 48px;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    padding: 12px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+}
+
+.login-form button {
+    font-family: "Built Titling", sans-serif;
+    margin-top: 25px;
+    padding: 12px;
+    background: #DE1E29;
+    color: yellow;
+    border: none;
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background: #c51923;
+}
+
+/* Links */
+.login-link {
+    display: block;
+    margin-top: 15px;
+    color: #DE1E29;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Error messages */
+.login-error-message {
+    color: #DE1E29;
+    font-size: 24px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Image container */
+.login-image-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

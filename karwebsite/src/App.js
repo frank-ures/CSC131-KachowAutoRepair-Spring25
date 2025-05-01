@@ -15,7 +15,7 @@ import TEMPLandingPage from "./components/TEMPLandingPage";
 import ServicesPage from './HomePages/ServicesPage/ServicesPage';
 import AboutUsPage from "./HomePages/AboutUsPage/AboutUsPage";
 import ReviewsPage from "./HomePages/ReviewsPage/ReviewsPage";
-import Login from './components/Login';
+import Login from './LoginPage/Login';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';

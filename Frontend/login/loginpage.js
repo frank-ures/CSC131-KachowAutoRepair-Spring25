@@ -1,4 +1,3 @@
-
 var emailField = document.getElementById("email-field");
 var passwordField = document.getElementById("password");
 var emailError = document.getElementById("email-error");
