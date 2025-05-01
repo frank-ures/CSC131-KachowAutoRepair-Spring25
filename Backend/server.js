@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/userRoutes.js";
 import shiftRoutes from './routes/shiftRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
+import appointmentTypeRoutes from './routes/appointmentTypeRoutes.js';
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
@@ -31,6 +32,7 @@ app.use('/reviews', reviewRoutes);
 app.use('/api', userRoutes);
 app.use('/api', shiftRoutes);
 app.use('/api', appointmentRoutes);
+app.use('/api', appointmentTypeRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()
