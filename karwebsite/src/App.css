@@ -352,6 +352,7 @@ html, body {
 }
 
 .login-form label {
+  color: #DE1E29;
   margin-top: 15px;
   font-weight: bold;
   margin-bottom: 5px;

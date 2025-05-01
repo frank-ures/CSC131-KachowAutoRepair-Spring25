@@ -16,6 +16,7 @@ import ServicesPage from './HomePages/ServicesPage';
 import AboutUsPage from "./HomePages/AboutUsPage";
 import ReviewsPage from "./HomePages/ReviewsPage";
 import Login from './HomePages/Login';
+import RegisterPage from './HomePages/Register';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           {/* Auth routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/role-router" element={<RoleRouter />} />
           
           {/* Temporary landing page - can redirect to login if not authenticated */}
