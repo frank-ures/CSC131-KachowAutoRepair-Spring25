@@ -31,7 +31,7 @@ app.use('/auth', authRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/api', userRoutes);
 app.use('/api', shiftRoutes);
-//app.use('/api', appointmentRoutes);
+app.use('/api', appointmentTypeRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()

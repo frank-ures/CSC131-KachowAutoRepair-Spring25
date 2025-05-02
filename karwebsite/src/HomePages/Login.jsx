@@ -45,7 +45,8 @@ const LoginPage = () => {
         // Store token in localStorage
         localStorage.setItem('token', data.token);
         // Redirect based on role if provided
-        if (data.role === 'admin') {
+        navigate('/role-router');
+        /*if (data.role === 'admin') {
           navigate('/admin');
         } else if (data.role === 'mechanic') {
           navigate('/employee');
@@ -53,7 +54,7 @@ const LoginPage = () => {
           navigate('/customer');
         } else {
           navigate('/');
-        }
+        }*/
       } else {
         console.error("Login failed:", data);
         alert(data.error || "Login failed");

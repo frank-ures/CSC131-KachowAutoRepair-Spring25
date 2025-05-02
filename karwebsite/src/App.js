@@ -29,6 +29,7 @@ function App() {
         <Routes>
           {/* Auth routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/role-router" element={<RoleRouter />} />
           
           {/* Temporary landing page - can redirect to login if not authenticated */}
