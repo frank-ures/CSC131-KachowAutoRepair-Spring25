@@ -24,6 +24,6 @@ export const PrivateRoute = ({ roleRequired }) => {
     return <Outlet />;
   }
   
-  // User doesn't have the required role - redirect to their dashboard
-  return <Navigate to={`/${currentUser.role}`} />;
+  // User doesn't have the required role - redirect to role router
+  return <Navigate to='/role-router' />;
 };
