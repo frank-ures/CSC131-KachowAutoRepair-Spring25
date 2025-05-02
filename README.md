@@ -1,6 +1,6 @@
 <div align="center">
    <h1 align="center">Kachow Auto Repair - CSC 131 Project - Spring 2025</h1>
-   <img src="./images/logo.png" alt="Logo" width="400" height="400">
+   <img src="./karwebsite/src/components/kar-logo.png" alt="Logo" width="400" height="400">
 </div>
 
 ---
@@ -38,10 +38,10 @@ Kachow Auto Repair (KAR) provides a website where every service is unified under
 
 ## Tech Stack
 
-* <img src="./images/mongodb.png" alt="MongoDB" width="24" height="24"> MongoDB
-* <img src="./images/expressjs.png" alt="ExpressJS" width="24" height="24"> Express.js
-* <img src="./images/reactjs.svg" alt="ReactJS" width="24" height="24"> React.js
-* <img src="./images/nodejs.svg" alt="NodeJS" width="24" height="24"> Node.js
+* <img src="./Frontend/public/images/mongodb.png" alt="MongoDB" width="24" height="24"> MongoDB
+* <img src="./Frontend/public/images/expressjs.png" alt="ExpressJS" width="24" height="24"> Express.js
+* <img src="./Frontend/public/images/reactjs.svg" alt="ReactJS" width="24" height="24"> React.js
+* <img src="./Frontend/public/images/nodejs.svg" alt="NodeJS" width="24" height="24"> Node.js
 
 ## Installation
 
