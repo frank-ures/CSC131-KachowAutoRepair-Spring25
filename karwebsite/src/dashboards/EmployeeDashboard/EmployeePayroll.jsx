@@ -53,7 +53,8 @@ const EmployeePayroll = () => {
     try {
       const formattedStart = new Date(startDate).toISOString();
       const formattedEnd = new Date(endDate).toISOString();
-      const response = await authFetch(`/appointments/tasks-summary?startDate=${formattedStart}&endDate=${formattedEnd}`);
+      const response = await authFetch(`appointments/tasks-summary?startDate=${formattedStart}&endDate=${formattedEnd}`);
+      console.log(response);
       if (!response.ok) {
         throw new Error("Failed to fetch task summary");
       }
