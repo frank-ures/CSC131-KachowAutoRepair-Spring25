@@ -4,8 +4,8 @@
     background: #141414;
     color: #fff;
     /* opacity: 0.95; might change later im not sure*/
-    padding: 40px;
-    top: 800px;
+    padding: 40px 15%;
+    top: 90vh;
     left: 0;
     position: absolute;
     box-sizing: border-box;
@@ -15,7 +15,6 @@
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
 }
-
 .black-box h1 {
     font-size: 64px;
     margin-top: 25px;

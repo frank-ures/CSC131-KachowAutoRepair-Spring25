@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
-import carGarage from "../components/car-garage.jpg";
+import loginBkgImg from "../components/login-bkg-img.jpg";
 
 const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -282,7 +282,7 @@ const RegisterPage = () => {
             )}
           </div>
           <div className="login-image-container">
-            <img src={carGarage} alt="Race Car in Garage" />
+            <img src={loginBkgImg} alt="Login Background" />
           </div>
         </div>
       </main>

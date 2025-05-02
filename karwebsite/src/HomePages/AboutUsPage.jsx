@@ -1,7 +1,7 @@
 // src/HomePages/AboutUsPage/AboutUsPage.jsx
 import React from 'react';
 import HomeLayout from '../components/HomeLayout';
-import AboutUsPageBkgImg from '../components/aboutus-page-bkg-img.png';
+import AboutUsPageBkgImg from '../components/aboutus-page-bkg-img.jpg';
 import BlackBox from '../components/BlackBox';
 import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
 import BlackBoxHeader from "../components/BlackBoxHeader";
@@ -14,6 +14,7 @@ import RichardImg from '../components/Richard.png';
 import WadeImg from '../components/Wade.png';
 import RobertImg from '../components/Robert.png';
 import AboutUsBox from "../components/AboutUsBox";
+import PhoneNumberAndAddress from "../components/PhoneNumberAndAddress";
 import ContactUsBox from '../components/ContactUsBox';
 import Footer from '../components/Footer';
 
@@ -33,7 +34,16 @@ const AboutUsPage = () => {
                     Whether it's routine maintenance, diagnostics, or complex repairs, you can count on us
                     to get the job done right.
                 </p>
-                <img src={TheBoysImg} alt="The Boys" className="the-boys-image" />
+                    <img
+                        src={TheBoysImg}
+                        alt="The Boys"
+                        style={{
+                            display: 'block',
+                            margin: '40px auto',      // vertical margin + auto horizontal centering
+                            width: '100%',
+                            height: 'auto',
+                        }}
+                    />
                 <h1>Our Mission</h1>
                 <p>
                     Our mission at KAR is to provide exceptional automotive repair services
@@ -50,7 +60,16 @@ const AboutUsPage = () => {
                     with a customer-first approach. Located conveniently in Sacramento, California,
                     our team is dedicated to providing the best service experience possible.
                 </p>
-                <img src={HandsImg} alt="Hands" className="hands-image" />
+                    <img
+                        src={HandsImg}
+                        alt="Hands"
+                        style={{
+                            display: 'block',
+                            margin: '40px auto',
+                            width: '100%',
+                            height: 'auto',
+                        }}
+                    />
                 <h1>Meet Our Team</h1>
                 <p>
                     Our team is made up of certified mechanics and service advisors who bring
@@ -86,13 +105,8 @@ const AboutUsPage = () => {
                 <p> Sacramento, CA, 95819, </p>
                 <p> United States</p>
                 </div>
-
-                <div style={{ height: '150px' }}></div>
-                <div style={{ margin: 'auto', textAlign: 'center', fontSize: '3rem', whiteSpace: 'pre' }}>
-                    (916) 278-6011                                                                 6000 J Street, Sacramento, CA, 95819, United States
-                </div>
-
-                <div style={{ height: '150px' }}></div>
+                <PhoneNumberAndAddress/>
+                <div style={{ height: '50px' }}></div>
                 <ContactUsBox/>
                 <Footer/>
             </BlackBox>

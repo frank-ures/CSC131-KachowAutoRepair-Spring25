@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HomeLayout from '../components/HomeLayout';
-import ReviewsPageBkgImg from '../components/reviews-page-bkg-img.png';
+import ReviewsPageBkgImg from '../components/reviews-page-bkg-img.jpg';
 import BlackBox from '../components/BlackBox';
 import ScheduleAppointmentButton from '../components/ScheduleAppointmentButton';
 import BlackBoxHeader from '../components/BlackBoxHeader';
@@ -9,6 +9,7 @@ import LoginToMakeReviewButton from '../components/LoginToMakeReviewButton';
 import ReviewRing from '../components/ReviewRing';
 import RatingDistribution from '../components/RatingDistribution';
 import ReviewList from '../components/ReviewList';
+import PhoneNumberAndAddress from '../components/PhoneNumberAndAddress';
 import ContactUsBox from '../components/ContactUsBox';
 import Footer from '../components/Footer';
 
@@ -75,6 +76,9 @@ const ReviewsPage = () => {
                     <LoginToMakeReviewButton />
                     <p>&emsp;</p>
                     <p>&emsp;</p>
+                    <div style={{ height: "150px" }}></div>
+                    <PhoneNumberAndAddress/>
+                    <div style={{ height: "50px" }}></div>
                     <ContactUsBox/>
                     <Footer/>
                 </BlackBox>
@@ -105,6 +109,10 @@ const ReviewsPage = () => {
                 <LoginToMakeReviewButton />
                 <p>&emsp;</p>
                 <p>&emsp;</p>
+
+                <div style={{ height: "150px" }}></div>
+                <PhoneNumberAndAddress/>
+                <div style={{ height: "50px" }}></div>
                 <ContactUsBox/>
                 <Footer/>
             </BlackBox>
