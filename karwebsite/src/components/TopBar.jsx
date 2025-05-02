@@ -31,6 +31,7 @@ const TopBar = () => {
       if (response.ok) {
         // Clear authentication data
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setIsLoggedIn(false);
         
         // Redirect to login page

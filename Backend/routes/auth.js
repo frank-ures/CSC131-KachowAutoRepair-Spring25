@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
         );
         const role = user.role;
         // Send back just the token. The client will decode it.
-        res.json({ role, token });
+        res.json({ user, role, token });
 
         //  END ADDITION ------------------------------------------------------
 

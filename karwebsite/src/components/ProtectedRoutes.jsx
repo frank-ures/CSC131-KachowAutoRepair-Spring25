@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 // More flexible component that can protect routes based on specific roles
-export const PrivateRoute = ({ roleRequired = null }) => {
+export const PrivateRoute = ({ roleRequired }) => {
   const { currentUser, isLoading } = useAuth();
   
   // Show loading indicator while checking auth status

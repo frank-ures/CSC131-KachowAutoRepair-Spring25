@@ -60,12 +60,17 @@ function App() {
 
 // Define RoleRouter component after App
 const RoleRouter = () => {
-  const { currentUser, isAuthenticated } = useAuth();
+  const { currentUser, isAuthenticated, isLoading } = useAuth();
+  console.log("role router",currentUser);
   
+  if (isLoading) {
+    return <div className="loading">Loading user data...</div>;
+  }
+
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
-  
+
   switch (currentUser.role) {
     case 'admin':
       return <Navigate to="/admin" />;

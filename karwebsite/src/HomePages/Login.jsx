@@ -1,77 +1,109 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TopBar from '../components/TopBar';
-import loginBkgImg from '../components/login-bkg-img.jpg'
-import '../components/Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import TopBar from "../components/TopBar";
+import loginBkgImg from "../components/login-bkg-img.jpg";
+import "../components/Login.css";
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const validateEmail = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email.match(emailRegex)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError("Please enter a valid email address");
       return false;
     }
-    setEmailError('');
+    setEmailError("");
     return true;
   };
 
   const validatePassword = () => {
     if (!password) {
-      setPasswordError('Please enter your password');
+      setPasswordError("Please enter your password");
       return false;
     }
-    setPasswordError('');
+    setPasswordError("");
     return true;
   };
 
-  const loginUser = async () => {
-    try {
-      const response = await fetch("http://localhost:5999/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+  // const loginUser = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:5999/auth/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email, password }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (response.ok) {
-        console.log("Login successful:", data);
-        // Store token in localStorage
-        localStorage.setItem('token', data.token);
-        // Redirect based on role if provided
-        navigate('/role-router');
-        /*if (data.role === 'admin') {
-          navigate('/admin');
-        } else if (data.role === 'mechanic') {
-          navigate('/employee');
-        } else if (data.role === 'customer') {
-          navigate('/customer');
-        } else {
-          navigate('/');
-        }*/
-      } else {
-        console.error("Login failed:", data);
-        alert(data.error || "Login failed");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      alert("Network or server error");
-    }
-  };
+  //     if (response.ok) {
+  //       console.log("Login successful:", data);
+  //       // Store token in localStorage
+  //       localStorage.setItem("token", data.token);
+  //       // Redirect based on role if provided
+  //       // navigate('/role-router');
+  //       if (data.user) {
+  //         localStorage.setItem("user", JSON.stringify(data.user));
+  //       }
+  //       if (data.role === "admin") {
+  //         navigate("/admin");
+  //       } else if (data.role === "mechanic") {
+  //         navigate("/employee");
+  //       } else if (data.role === "customer") {
+  //         navigate("/customer");
+  //       } else {
+  //         navigate("/");
+  //       }
+  //     } else {
+  //       console.error("Login failed:", data);
+  //       alert(data.error || "Login failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during login:", error);
+  //     alert("Network or server error");
+  //   }
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
 
     if (isEmailValid && isPasswordValid) {
-      loginUser();
+      setIsLoading(true);
+      try {
+        const result = await login(email, password);
+
+        if (result.success) {
+          console.log("Login success, role:", result.role);
+
+          // Navigate based on role
+          if (result.role === "admin") {
+            navigate("/admin");
+          } else if (result.role === "mechanic") {
+            navigate("/employee");
+          } else if (result.role === "customer") {
+            navigate("/customer");
+          } else {
+            navigate("/");
+          }
+        } else {
+          console.error("Login failed:", result.error);
+          alert(result.error || "Login failed");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("Network or server error");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -96,7 +128,9 @@ const LoginPage = () => {
                 spellCheck="false"
                 placeholder="Enter Email Address Here..."
               />
-              {emailError && <span className="login-error-message">{emailError}</span>}
+              {emailError && (
+                <span className="login-error-message">{emailError}</span>
+              )}
 
               <label htmlFor="password">Password</label>
               <input
@@ -107,12 +141,20 @@ const LoginPage = () => {
                 onBlur={validatePassword}
                 placeholder="Enter Password Here..."
               />
-              {passwordError && <span className="login-error-message">{passwordError}</span>}
+              {passwordError && (
+                <span className="login-error-message">{passwordError}</span>
+              )}
 
-              <button type="submit">Sign In</button>
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? "Signing In..." : "Sign In"}
+              </button>
             </form>
-            <a href="/forgotPassword" className="login-link">Forgot your password?</a>
-            <a href="/register" className="login-link">Don't have an account? Sign Up</a>
+            <a href="/forgotPassword" className="login-link">
+              Forgot your password?
+            </a>
+            <a href="/register" className="login-link">
+              Don't have an account? Sign Up
+            </a>
           </div>
           <div className="login-image-container">
             <img src={loginBkgImg} alt="Login Background" />
