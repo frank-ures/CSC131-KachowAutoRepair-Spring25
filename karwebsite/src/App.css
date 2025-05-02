@@ -1084,7 +1084,8 @@ html, body {
 .button, 
 .start-button, 
 .cancel-button,
-.view-history-button {
+.view-history-button,
+.update-button {
   padding: 6px 12px;
   border-radius: 4px;
   font-weight: 500;
@@ -1280,4 +1281,40 @@ html, body {
     font-size: 14px !important;
   }
 }
+
+.update-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: 'Built Titling', serif;
+  font-size: 1.3rem;
+  gap: 8px;
+  align-items: center;
+  
+  
+}
+
+.appointment-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.time-container {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.service-column {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
 

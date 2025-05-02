@@ -77,11 +77,16 @@ const CustomerAppointmentHistory = () => {
             {/*<div className="appointment-details">*/}
               {/*<h3 className="schedule-service">{appointment.event_type}</h3>*/}
             {/*<div className="appointment-details">*/}
+            {/*<div className="appointment-content">*/}
               <h3 className="schedule-service">{appointment.event_type}</h3>
+              {/*<button className="update-button"> Update Appointment </button>*/}
+              {/*</div>*/}
+              
+
               <div className="vehicle-info">
                 <span className="vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
                 
-                
+
               </div>
             
             </div>

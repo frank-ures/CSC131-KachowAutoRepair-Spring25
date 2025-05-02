@@ -92,12 +92,26 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
             
             </div>
             {/*<div className="appointment-details">*/}
+            <div className="appointment-content">
+              <div className="service-column">
               <h3 className="schedule-service">{appointment.event_type}</h3>
-              <div className="appt-info">
-                <span className="appt-vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
-                <span className="appt-sched-time">
+              <div className="time-container">
+              <span className="appt-sched-time">
             {formatTime(appointment.start_time)} - {formatTime(appointment.end_time)}
             </span>
+            </div>
+            </div>
+            
+
+              <button className="update-button"> Update Appointment </button>
+              </div>
+             
+            
+
+
+              <div className="appt-info">
+                <span className="appt-vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
+                
               </div>
             
           </div>
