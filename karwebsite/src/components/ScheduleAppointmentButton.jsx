@@ -5,7 +5,7 @@ import './ScheduleAppointmentButton.css';
 
 const ScheduleAppointmentButton = () => {
     return (
-        <Link to="/appointment" className="schedule-appointment-btn">
+        <Link to="/customer" className="schedule-appointment-btn">
             SCHEDULE APPOINTMENT
         </Link>
     );

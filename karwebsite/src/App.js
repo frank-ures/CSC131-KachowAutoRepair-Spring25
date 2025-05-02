@@ -16,6 +16,8 @@ import AboutUsPage from "./HomePages/AboutUsPage";
 import ReviewsPage from "./HomePages/ReviewsPage";
 import Login from './HomePages/Login';
 import RegisterPage from './HomePages/Register';
+import ForgotPassword from './HomePages/ForgotPassword';
+import ResetPassword from './HomePages/ResetPassword';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';
@@ -31,6 +33,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/role-router" element={<RoleRouter />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
           
           {/* Temporary landing page - can redirect to login if not authenticated */}
           <Route path="/" element={<LandingPage />} />
