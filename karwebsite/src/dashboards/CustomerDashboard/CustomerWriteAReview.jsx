@@ -1,6 +1,6 @@
 // src/dashboards/CustomerDashboard/CustomerWriteAReview.jsx
 
-/*
+
 // THIS VERSION TESTS WITHOUT LOGIN
 // UNCOMMENT VERSION BELOW TO TEST WITH LOGIN
 import React, { useState } from 'react';
@@ -34,7 +34,7 @@ const CustomerWriteAReview = () => {
 
         // Using "Test" as the username for testing purposes
         const reviewData = {
-            userFullName: "Test",
+            userFullName: "User",
             stars: rating,
             service: selectedService,
             comment: comment.trim()
@@ -140,7 +140,7 @@ const CustomerWriteAReview = () => {
 export default CustomerWriteAReview;
 
 
- */
+ /*
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from '../../components/StarRating';
@@ -290,3 +290,4 @@ const CustomerWriteAReview = () => {
 };
 
 export default CustomerWriteAReview;
+*/

@@ -403,4 +403,60 @@ app.get('/api/appointments/history', async (req, res) => {
       console.log("MongoDB connection closed after history fetch");
     }
   }
+
+
+  // Endpoint to cancel an appointment
+app.delete('/api/appointments/:id', async (req, res) => {
+  let mongoClient;
+  try {
+    const appointmentId = req.params.id;
+    
+    if (!appointmentId) {
+      return res.status(400).json({ error: 'Appointment ID is required' });
+    }
+    
+    mongoClient = new MongoClient(mongoUri);
+    await mongoClient.connect();
+    console.log("Connected to MongoDB for canceling appointment");
+    
+    const db = mongoClient.db("calendarDB");
+    const collection = db.collection("events");
+    
+    // Find the appointment first to get customer details for potential notification
+    const appointment = await collection.findOne({
+      _id: new mongoose.Types.ObjectId(appointmentId)
+    });
+    
+    if (!appointment) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+    
+    // Update the appointment status to 'canceled'
+    // Alternatively, you could delete it completely with deleteOne()
+    const result = await collection.updateOne(
+      { _id: new mongoose.Types.ObjectId(appointmentId) },
+      { $set: { 
+        
+        status: 'canceled', 
+        canceled_at: new Date().toISOString() 
+      }}
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Failed to cancel appointment' });
+    }
+    
+    console.log(`Appointment ${appointmentId} canceled successfully`);
+  }
+  catch (error) {
+    console.error("Error canceling appointment:", error);
+    res.status(500).json({ error: 'Failed to cancel appointment', details: error.message });
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+      console.log("MongoDB connection closed after appointment cancellation");
+    }
+  }
+});
+
 });
