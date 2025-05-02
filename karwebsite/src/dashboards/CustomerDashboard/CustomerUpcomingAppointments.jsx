@@ -72,9 +72,9 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
     }
   };
 
-  if (loading) return <div className="loading">Loading your appointment history...</div>;
+  if (loading) return <div className="loading">Loading your upcoming appointments...</div>;
   if (error) return <div className="error-message">{error}</div>;
-  if (appointments.length === 0) return <div className="no-appointments">You don't have any previous appointments.</div>;
+  if (appointments.length === 0) return <div className="no-appointments">You don't have any upcoming appointments.</div>;
 
   return (
     <div className="customer-history-container">

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from "../../context/AuthContext";
+
 
 
 // CustomerHistoryModal component
@@ -99,6 +101,7 @@ const EmployeeSchedule = () => {
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [displayDate, setDisplayDate] = useState('');
+  const { currentUser, authFetch } = useAuth();
   
   // state for customer history modal
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
@@ -149,18 +152,7 @@ const EmployeeSchedule = () => {
           appointmentDate.getDate() === date.getDate()
         );
       });
-      /*
-      const filteredAppointments = response.data.filter(appointment => {
-        // Creates a date object from the appointment's start time in local time
-        const appointmentDate = new Date(appointment.start_time);
-        const appointmentDateStr = appointmentDate.toDateString();
-        
-        console.log(`Appointment ${appointment._id} date: ${appointmentDateStr}`); // Debugging by logging each appointment date
-        
-        // Compares date strings 
-        return appointmentDateStr === selectedDateStr;
-      });
-      */
+      
       console.log('Filtered appointments:', filteredAppointments); // Debugging by logging filtered results
       
       // Sort by start time
@@ -245,13 +237,14 @@ const EmployeeSchedule = () => {
     try {
       const response = await axios.post('http://localhost:5999/api/appointments/start', {
         appointmentId: appointment._id,
-        status: 'in_progress'
+        status: 'in_progress',
+        mechanic_Id: currentUser._id
       });
       
       if (response.status === 200) {
         // Updates the local state to reflect the change
         const updatedTasks = scheduleTasks.map(task => 
-          task._id === appointment._id ? { ...task, status: 'in_progress' } : task
+          task._id === appointment._id ? { ...task, status: 'in_progress', mechanic_Id: currentUser._id } : task
         );
         setScheduleTasks(updatedTasks);
         alert(`Appointment with ${appointment.invitee_name} has been started.`);

@@ -197,7 +197,7 @@ app.post("/webhook/calendly", async (req, res) => {
 app.post("/api/appointments/start", async (req, res) => {
   let mongoClient;
   try {
-    const { appointmentId, status } = req.body;
+    const { appointmentId, status, mechanic_Id } = req.body;
     
     if (!appointmentId) {
       return res.status(400).send("Appointment ID is required");
@@ -212,14 +212,18 @@ app.post("/api/appointments/start", async (req, res) => {
     // Update the appointment with the new status
     const result = await collection.updateOne(
       { _id: new mongoose.Types.ObjectId(appointmentId) },
-      { $set: { status: status, started_at: new Date().toISOString() } }
+      { $set: { 
+          status: status, 
+          started_at: new Date().toISOString(),
+          mechanic_Id: mechanic_Id} },
+      
     );
     
     if (result.matchedCount === 0) {
       return res.status(404).send("Appointment not found");
     }
     
-    console.log(`Appointment ${appointmentId} updated to status: ${status}`);
+    console.log(`Appointment ${appointmentId} updated to status: ${status} by mechanic: ${mechanic_Id}`);
     res.status(200).json({ message: "Appointment status updated successfully" });
   } catch (error) {
     console.error("Error updating appointment status:", error);
