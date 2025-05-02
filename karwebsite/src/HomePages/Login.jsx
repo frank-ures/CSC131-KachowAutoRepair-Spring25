@@ -199,7 +199,7 @@ const LoginPage = () => {
             </form>
             {!requireMfa && (
               <>
-                <a href="/forgotPassword" className="login-link">
+                <a href="/forgot-password" className="login-link">
                   Forgot your password?
                 </a>
                 <a href="/register" className="login-link">

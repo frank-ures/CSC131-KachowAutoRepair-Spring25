@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }, // Store hashed passwords
   hourlyWage: { type: Number, default: 0 },
-  vehicleIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'vehicle' }],
+  //vehicles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'vehicle' }],
+  vehicleIds: [{ type: mongoose.Schema.Types.Mixed, ref: 'vehicle' }],
   // Appointments were saved as a string in the database breaking login somehow
   //appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }],
   appointments: { 
