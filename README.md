@@ -22,21 +22,22 @@ Kachow Auto Repair (KAR) provides a website where every service is unified under
 ## Features
 
 * Customer Dashboard
-  * EmployeeSchedule an appointment.
-  * View appointment history.
-  * View upcoming appointments.
-  * Write a review.
+  * Schedule an Appointment.
+  * View Past Appointments.
+  * View Upcoming Appointments.
+  * Write a Review.
+  * Change Email & Password.
 * Employee Dashboard
-  * View appointments scheduled for the day.
-  * Start and stop work on scheduled appointments.
-  * View previous appointments you have completed.
-  * View your payroll information.
+  * View Appointments Scheduled for the Day.
+  * Start and Stop Work on Scheduled Appointments.
+  * View Previous Appointments Completed by the Employee.
+  * View Employee's Personal Payroll Information.
 * Administrator Dashboard
-  * View employees' payroll information.
-  * Manage your employees and their accounts.
-  * View appointments scheduled for the day.
+  * View Appointments Scheduled for the Day.
+  * Manage Employees and their Accounts.
+  * View and Update Employees' Payroll Information.
 
-## Tech Stack
+## Tech Stack (MERN)
 
 * <img src="./Frontend/public/images/mongodb.png" alt="MongoDB" width="24" height="24"> MongoDB
 * <img src="./Frontend/public/images/expressjs.png" alt="ExpressJS" width="24" height="24"> Express.js
@@ -56,19 +57,21 @@ To install the Kachow Auto Repair project:
 4. Set up environment variables in the `.env` file (default port 5000):
 `MONGO_URI=your_mongo_uri
 PORT=open_port_number`
+etc.
 5. Build the project:
 `npm run build`
 6. Start the project:
-`npm start`
+`npm run dev` from `CSC131-KachowAutoRepair-Spring25` directory
+`npm start` from `karwebsite` directory
 
 ## Usage
 
 To use the Kachow Auto Repair website:
 
 1. Follow the full [installation procedure](#Installation) stated above.
-2. Navigate to `http://localhost:5000` (use port number from installation step 4).
+2. Navigate to `http://localhost:3000`.
 3. Create an account or login to an existing account.
-4. EmployeeSchedule and manage automotive appointments, or explore other features the website has to offer.
+4. Schedule and manage automotive appointments, or explore other features the website has to offer.
 
 ## Contact
 
