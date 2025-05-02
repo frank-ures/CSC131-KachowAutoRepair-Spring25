@@ -147,6 +147,9 @@ app.post("/webhook/calendly", async (req, res) => {
       end_time: payload.scheduled_event.end_time,
     };
 
+
+    
+
     // Process the questions and answers to get the vehicle details
     const answers = payload.questions_and_answers || [];
     for (const item of answers) {

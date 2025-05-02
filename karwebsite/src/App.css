@@ -129,9 +129,11 @@ organize and optimize in next sprints
 }
 
 .schedule-time {
-  font-size: 20px;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #DE1E29;
+  /*padding-right: 280px;*/
+  
 }
 
 .schedule-details {
@@ -399,7 +401,7 @@ html, body {
 }
 
 .schedule-name {
-  flex: 0 0 30%;
+  /*flex: 0 0 30%;*/
   text-align: left;
   font-size: 24px;
   font-weight: bold;
@@ -772,13 +774,13 @@ html, body {
   color: #555;
   margin-bottom: 5px;
 }
-
+/*
 .vehicle-info {
-  font-size: 18px;
+  font-size: 1.8rem;
   color: #555;
   margin-bottom: 10px;
 }
-
+*/
 .appointment-time {
   font-size: 18px;
   color: #555;
@@ -786,7 +788,7 @@ html, body {
 }
 
 .appointment-status {
-  margin-left: 20px;
+  margin: 20px;
 }
 
 .status-badge {
@@ -1121,9 +1123,29 @@ html, body {
 
 }
 
-.vehicle-info {
+
+
+.appt-info {
 
   font-size: 1.8rem;
   flex: 1;
-  text-align: center;
+  margin-bottom: 10px;
+
+  
 }
+
+.appt-vehicle {
+  padding-right: 278px;
+}
+
+.appt-sched-time {
+  color: #DE1E29;
+  font-weight: bold;
+  
+}
+
+.vehicle {
+  font-size: 1.8rem;
+}
+
+

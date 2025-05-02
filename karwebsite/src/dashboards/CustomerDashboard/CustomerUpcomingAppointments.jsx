@@ -1,44 +1,111 @@
-// src/components/EmployeeSchedule.jsx
-import React, { useState } from 'react';
+//This should allow the customer when logged in to be able to see their previous appointments.
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
 
-const CustomerUpcomingAppointments = () => {
-    const [upcomingAppointments, setUpcomingAppointments] = useState([
-        { appointmentDate: '05/01/25', service: 'Brake Repair and Replacement' },
-        { appointmentDate: '06/15/25', service: 'Air Conditioning Service' },
-        { appointmentDate: '07/10/25', service: 'Oil Change' },
-    ]);
+const CustomerAppointmentHistory = () => {
+  const { currentUser } = useAuth();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const handleCancel = (index, e) => {
-        e.stopPropagation();
-        const newTasks = [...upcomingAppointments];
-        newTasks.splice(index, 1);
-        setUpcomingAppointments(newTasks);
-    };
+  useEffect(() => {
+    // Fetch appointment history when component mounts
+    if (currentUser && currentUser.email) {
+      fetchAppointmentHistory(currentUser.email);
+    } else {
+      setLoading(false);
+      setError('You need to be logged in to view appointment history.');
+    }
+  }, [currentUser]);
 
-    return (
-        <div className="content-section">
-            <h1 className="page-title">Upcoming Appointments</h1>
-            <div className="appointment-container">
-                {upcomingAppointments.length === 0 ? (
-                    <div className="no-upcoming-appointments-message">No upcoming appointments found.</div>
-                ) : (
-                    upcomingAppointments.map((upcomingAppointments, index) => (
-                        <div
-                            key={index}
-                            className="schedule-item"
-                            onClick={() => alert(`Showing details for ${upcomingAppointments.date}: ${upcomingAppointments.service}`)}
-                        >
-                            <div className="appointment-date">{upcomingAppointments.appointmentDate}</div>
-                            <div className="appointment-service">{upcomingAppointments.service}</div>
-                            <div className="appointment-cancel">
-                                <button onClick={(e) => handleCancel(index, e)}>Cancel</button>
-                            </div>
-                        </div>
-                    ))
-                )}
+
+/*
+const CustomerAppointmentHistory = ({ userEmail }) => {
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+
+  useEffect(() => {
+    // Fetch appointment history when component mounts
+    if (userEmail) {
+      fetchAppointmentHistory();
+    }
+  }, [userEmail]);
+*/
+  const fetchAppointmentHistory = async (email) => {
+    try {
+      setLoading(true);
+      console.log(`Fetching appointments for: ${email}`);
+      const response = await axios.get(`http://localhost:5999/api/appointments/history?email=${encodeURIComponent(email)}`);
+      ////////////changed filter to get completed appointments only
+      const completedAppointments = response.data.filter(appointment => 
+        appointment.status !== 'completed' && appointment.status !== 'in_progress');
+      //setAppointments to completed appointments instead of response.data
+      setAppointments(completedAppointments);
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to fetch appointment history:', err);
+      setError('Failed to load your appointment history. Please try again later.');
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString();
+  };
+
+  const formatTime = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case 'completed': return 'status-completed';
+      case 'in_progress': return 'status-in-progress';
+      case 'scheduled': return 'status-scheduled';
+      default: return 'status-scheduled'; // Default status if none specified
+    }
+  };
+
+  if (loading) return <div className="loading">Loading your appointment history...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (appointments.length === 0) return <div className="no-appointments">You don't have any previous appointments.</div>;
+
+  return (
+    <div className="customer-history-container">
+      <h2>Your Appointment History</h2>
+      <div className="appointment-list">
+        {appointments.map(appointment => (
+            
+          <div key={appointment._id} className={`customer-schedule-item ${getStatusClass(appointment.status)}`}>
+            <div className="appointment-header">
+              <span className="appointment-date">{formatDate(appointment.start_time)}</span>
+              <span className={`appointment-status ${getStatusClass(appointment.status)}`}>
+                {appointment.status === 'completed' ? 'Completed' : 
+                 appointment.status === 'in_progress' ? 'In Progress' : 'Scheduled'}
+              </span>
+            
             </div>
-        </div>
-    );
+            {/*<div className="appointment-details">*/}
+              <h3 className="schedule-service">{appointment.event_type}</h3>
+              <div className="appt-info">
+                <span className="appt-vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
+                <span className="appt-sched-time">
+            {formatTime(appointment.start_time)} - {formatTime(appointment.end_time)}
+            </span>
+              </div>
+            
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default CustomerUpcomingAppointments;
+export default CustomerAppointmentHistory;
+

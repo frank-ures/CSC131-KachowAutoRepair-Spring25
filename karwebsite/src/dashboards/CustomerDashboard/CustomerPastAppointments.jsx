@@ -40,7 +40,10 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
       setLoading(true);
       console.log(`Fetching appointments for: ${email}`);
       const response = await axios.get(`http://localhost:5999/api/appointments/history?email=${encodeURIComponent(email)}`);
-      setAppointments(response.data);
+      ////////////changed filter to get completed appointments only
+      const completedAppointments = response.data.filter(appointment => appointment.status === 'completed');
+      //setAppointments to completed appointments instead of response.data
+      setAppointments(completedAppointments);
       setLoading(false);
     } catch (err) {
       console.error('Failed to fetch appointment history:', err);
