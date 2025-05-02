@@ -1,11 +1,32 @@
 //This should allow the customer when logged in to be able to see their previous appointments.
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
 
+const CustomerAppointmentHistory = () => {
+  const { currentUser } = useAuth();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch appointment history when component mounts
+    if (currentUser && currentUser.email) {
+      fetchAppointmentHistory(currentUser.email);
+    } else {
+      setLoading(false);
+      setError('You need to be logged in to view appointment history.');
+    }
+  }, [currentUser]);
+
+
+/*
 const CustomerAppointmentHistory = ({ userEmail }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
 
   useEffect(() => {
     // Fetch appointment history when component mounts
@@ -13,11 +34,12 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
       fetchAppointmentHistory();
     }
   }, [userEmail]);
-
-  const fetchAppointmentHistory = async () => {
+*/
+  const fetchAppointmentHistory = async (email) => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/appointments/history?email=${encodeURIComponent(userEmail)}`);
+      console.log(`Fetching appointments for: ${email}`);
+      const response = await axios.get(`http://localhost:5999/api/appointments/history?email=${encodeURIComponent(email)}`);
       setAppointments(response.data);
       setLoading(false);
     } catch (err) {
@@ -55,7 +77,7 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
       <h2>Your Appointment History</h2>
       <div className="appointment-list">
         {appointments.map(appointment => (
-          <div key={appointment._id} className={`appointment-card ${getStatusClass(appointment.status)}`}>
+          <div key={appointment._id} className={`customer-schedule-item ${getStatusClass(appointment.status)}`}>
             <div className="appointment-header">
               <span className="appointment-date">{formatDate(appointment.start_time)}</span>
               <span className={`appointment-status ${getStatusClass(appointment.status)}`}>
@@ -63,18 +85,13 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
                  appointment.status === 'in_progress' ? 'In Progress' : 'Scheduled'}
               </span>
             </div>
-            <div className="appointment-details">
-              <h3 className="service-type">{appointment.event_type}</h3>
-              <div className="time-slot">
-                <span className="time">{formatTime(appointment.start_time)} - {formatTime(appointment.end_time)}</span>
-              </div>
+            {/*<div className="appointment-details">*/}
+              <h3 className="schedule-service">{appointment.event_type}</h3>
               <div className="vehicle-info">
                 <span className="vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
-                {appointment.vehicle_license_plate && 
-                  <span className="license-plate">License: {appointment.vehicle_license_plate}</span>
-                }
+                
               </div>
-            </div>
+            
           </div>
         ))}
       </div>

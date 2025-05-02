@@ -31,8 +31,7 @@ app.use('/auth', authRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/api', userRoutes);
 app.use('/api', shiftRoutes);
-app.use('/api', appointmentRoutes);
-app.use('/api', appointmentTypeRoutes);
+//app.use('/api', appointmentRoutes);
 
 // Connect to MongoDB before starting the server
 connectDB()
@@ -97,6 +96,7 @@ app.get("/", (req, res) => {
   res.send("Server is working");
 });
 
+
 // API endpoint to get appointments
 app.get("/api/appointments", async (req, res) => {
   let mongoClient;
@@ -125,6 +125,7 @@ app.get("/api/appointments", async (req, res) => {
   }
 
 });
+
 
 //------------ Calendly Webhook Handler ------------
 app.post("/webhook/calendly", async (req, res) => {

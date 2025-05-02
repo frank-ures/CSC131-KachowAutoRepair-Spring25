@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 // CustomerHistoryModal component
 const CustomerHistoryModal = ({ customer, isOpen, onClose }) => {
   const [history, setHistory] = useState([]);
@@ -125,7 +126,12 @@ const EmployeeSchedule = () => {
   const fetchAppointmentsForDate = async (date) => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5999/api/appointments');
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:5999/api/appointments', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       console.log('API Response:', response.data); // Debugging by logging all appointments
       
       // Creates a date object that represents the start of the selected day in local time
@@ -136,6 +142,15 @@ const EmployeeSchedule = () => {
       console.log('Selected date for filtering:', selectedDateStr); // Debugging by logging the selected date
       
       const filteredAppointments = response.data.filter(appointment => {
+        const appointmentDate = new Date(appointment.start_time);
+        return (
+          appointmentDate.getFullYear() === date.getFullYear() &&
+          appointmentDate.getMonth() === date.getMonth() &&
+          appointmentDate.getDate() === date.getDate()
+        );
+      });
+      /*
+      const filteredAppointments = response.data.filter(appointment => {
         // Creates a date object from the appointment's start time in local time
         const appointmentDate = new Date(appointment.start_time);
         const appointmentDateStr = appointmentDate.toDateString();
@@ -145,7 +160,7 @@ const EmployeeSchedule = () => {
         // Compares date strings 
         return appointmentDateStr === selectedDateStr;
       });
-      
+      */
       console.log('Filtered appointments:', filteredAppointments); // Debugging by logging filtered results
       
       // Sort by start time

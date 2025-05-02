@@ -10,6 +10,7 @@ const AdminSidebar = ({ activeSection, setActiveSection, firstName }) => {
         'Employee List',
         'Payroll Settings'
     ];
+    
 
     return (
         <aside className="sidebar">

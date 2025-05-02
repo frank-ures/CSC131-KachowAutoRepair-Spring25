@@ -35,6 +35,7 @@ export const authorizeAdmin = (req, res, next) => {
     next();
   };
   
+
   // Middleware to check for mechanic or admin rights
   export const authorizeMechanic = (req, res, next) => {
     if (req.user.role !== 'mechanic' && req.user.role !== 'admin') {

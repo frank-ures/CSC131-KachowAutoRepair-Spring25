@@ -1,9 +1,13 @@
 // src/dashboards/CustomerDashboard/CustomerSidebar.jsx
 import React from 'react';
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
-const CustomerSidebar = ({ activeSection, setActiveSection, firstName }) => {
-    const { currentUser, authFetch } = useAuth();
+const CustomerSidebar = ({ activeSection, setActiveSection, }) => {
+    const { currentUser, logout } = useAuth();
+    const navigate = useNavigate();
+    //firstName }) => {
+    //const { currentUser, authFetch } = useAuth();
     const navItems = [
         'Overview',
         'Schedule An Appointment',
@@ -12,6 +16,15 @@ const CustomerSidebar = ({ activeSection, setActiveSection, firstName }) => {
         'Write a Review',
         'Settings'
     ];
+
+    /******************* */
+    const handleLogout = async () => {
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        }
+    };
+
 
     return (
         <aside className="sidebar">
@@ -29,6 +42,7 @@ const CustomerSidebar = ({ activeSection, setActiveSection, firstName }) => {
                     ))}
                 </ul>
             </nav>
+            <div className="logout">Log out</div>
         </aside>
     );
 };
