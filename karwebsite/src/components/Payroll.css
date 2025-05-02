@@ -38,7 +38,7 @@ styling for payroll widget
     cursor: pointer;
     max-width: 180px;
 }
-  
+
 .payroll-date input[type="date"]:focus {
     outline: none;
     border-color: #DE1E29;
@@ -57,15 +57,15 @@ styling for payroll widget
     transition: background-color 0.2s, transform 0.1s;
     margin-left: 10px;
 }
-  
+
 .fetch-shifts-btn:hover {
     background-color: #c51923;
 }
-  
+
 .fetch-shifts-btn:active {
     transform: scale(0.98);
 }
-  
+
 .fetch-shifts-btn:disabled {
     background-color: #999;
     cursor: not-allowed;
@@ -91,7 +91,7 @@ styling for payroll widget
 .progress-ring__background {
     stroke: #eee;
 }
-  
+
 .progress-ring__progress {
     transition: stroke-dashoffset 0.5s ease;
 }
@@ -135,19 +135,19 @@ styling for payroll widget
     .payroll-widget {
       padding: 30px 20px;
     }
-    
+
     .payroll-content {
       flex-direction: column;
     }
-    
+
     .payroll-date {
       font-size: 24px;
     }
-    
+
     .payroll-data-label {
       font-size: 16px;
     }
-    
+
     .payroll-data-value {
       font-size: 24px;
     }

@@ -1,7 +1,7 @@
 // src/HomePages/LandingPage/LandingPage.jsx
 import React from 'react';
 import HomeLayout from '../components/HomeLayout';
-import homePageBkgImg from '../components/home-page-bkg-img.png';
+import homePageBkgImg from '../components/home-page-bkg-img.jpg';
 import BlackBox from '../components/BlackBox';
 import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
 import theOwner from '../components/the-owner.png';
@@ -9,6 +9,7 @@ import HomeCustomerReview from '../components/homeCustomerReview';
 import customer1 from '../components/customer1.png';
 import customer2 from '../components/customer2.png';
 import customer3 from '../components/customer3.png';
+import PhoneNumberAndAddress from "../components/PhoneNumberAndAddress";
 import ContactUsBox from '../components/ContactUsBox';
 import Footer from '../components/Footer';
 
@@ -25,7 +26,7 @@ const LandingPage = () => {
                         <p>
                             Hey, I’m Rick Harrison, and this is Kachow Automotive Repair.
                             You need routine maintenance, diagnostics, or just want your car running like new?
-                            You’re in the right place. Our certified mechanics know their stuff and won’t waste your time—or your money.
+                            You’re in the right place. Our certified mechanics know their stuff and won’t waste your time or your money.
                             With our easy online booking and real-time updates, car trouble’s got nothing on us.
                             So stop stressing, schedule your appointment today, and let’s get your ride back on the road!
                         </p>
@@ -50,16 +51,13 @@ const LandingPage = () => {
                     />
                     <HomeCustomerReview
                         imgSrc={customer3}
-                        reviewText="Had a weird noise coming from my engine, and these guys figured it out quick. Honest pricing and great service—felt like I could really trust them. 10/10 would recommend."
+                        reviewText="Had a weird noise coming from my engine, and these guys figured it out quick. Honest pricing and great service, felt like I could really trust them. 10/10 would recommend."
                         reviewerName="Mike T."
                     />
                 </div>
                 <div style={{ height: '150px' }}></div>
-                <div style={{ margin: 'auto', textAlign: 'center', fontSize: '3rem', whiteSpace: 'pre' }}>
-                    (916) 278-6011                                                                 6000 J Street, Sacramento, CA, 95819, United States
-                </div>
-
-                <div style={{ height: '150px' }}></div>
+                <PhoneNumberAndAddress/>
+                <div style={{ height: '50px' }}></div>
                 <ContactUsBox/>
                 <Footer/>
             </BlackBox>

@@ -1,7 +1,7 @@
 /* src/layouts/HomeLayout.css */
 .home-layout {
-    width: 1440px;
-    min-height: 1024px;
+    width: 100vw;            /* or width: 100%; */
+    min-height: 100vh;       /* fill at least the full viewport height */
     margin: 0 auto;
     position: relative;
     background-size: cover;
@@ -9,5 +9,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed; /* keeps the background image static */
     z-index: 0;
+    /* span the entire viewport */
 
+    overflow-x: hidden;      /* prevents any horizontal scrollbar */
 }

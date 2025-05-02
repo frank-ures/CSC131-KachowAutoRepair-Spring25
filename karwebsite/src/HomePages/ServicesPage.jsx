@@ -1,12 +1,13 @@
 // src/HomePages/ServicesPage/ServicesPage.jsx
 import React, { useEffect, useState, useRef } from "react";
 import HomeLayout from "../components/HomeLayout";
-import ServicePageBkgImg from "../components/service-page-bkg-img.png";
+import ServicePageBkgImg from "../components/service-page-bkg-img.jpg";
 import BlackBox from "../components/BlackBox";
 import ScheduleAppointmentButton from "../components/ScheduleAppointmentButton";
 import BlackBoxHeader from "../components/BlackBoxHeader";
 import ContactUsBox from "../components/ContactUsBox";
 import Footer from "../components/Footer";
+import PhoneNumberAndAddress from "../components/PhoneNumberAndAddress";
 
 const ServicesPage = () => {
   const [serviceList, setServiceList] = useState([]);
@@ -46,7 +47,7 @@ const ServicesPage = () => {
 
         <div className="services-list-container">
           {serviceList.length === 0 && !isLoading ? (
-            <div className="no-employees-message">No employees found.</div>
+            <div className="no-employees-message"> </div>
           ) : (
             serviceList.map((service, index) => (
                 <div key={ service._id || index } className="service-item">
@@ -61,6 +62,8 @@ const ServicesPage = () => {
         </div>
 
         <div style={{ height: "150px" }}></div>
+        <PhoneNumberAndAddress/>
+        <div style={{ height: "50px" }}></div>
         <ContactUsBox />
         <Footer />
       </BlackBox>

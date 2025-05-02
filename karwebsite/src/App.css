@@ -44,13 +44,13 @@ organize and optimize in next sprints
 }
 
 .selected-date {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   color: gray;
 }
 
 .date-details {
-  font-size: 14px;
+  font-size: 18px;
   color: gray;
 }
 
@@ -60,13 +60,15 @@ organize and optimize in next sprints
   border: none;
   border-radius: 4px;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 24px;
   cursor: pointer;
   transition: background-color 0.2s;
+  font-family: 'Built Titling', serif;
 }
 
 .today-button:hover {
-  background: gray;
+  background: #c41e25;
+  font-size: 24px;
 }
 
 /* Current appointment styling */
@@ -177,7 +179,7 @@ html, body {
   width: 1440px;
   height: 1024px;
   margin: 0 auto;
-  position: relative;
+  position: static;
   overflow: hidden;
 }
 
@@ -202,10 +204,31 @@ html, body {
 }
 
 .logo-link {
-  display: flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  position: relative;
+  display: inline-flex;
+  color: #F6DF21;
+  transition: transform 0.2s ease;  /* smooth inflate */
+}
+
+.logo-link:hover {
+  transform: scale(1.1);            /* inflate on hover */
+}
+
+.logo-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;                     /* tweak as needed to sit just below the text */
+  width: 0;
+  height: 2px;
+  background-color: currentColor;   /* uses the link’s color */
+  transition: width 0.2s ease;
+}
+
+.logo-link:hover::after {
+  width: 100%;                      /* draw the underline */
 }
 
 .logo-link img {
@@ -227,23 +250,52 @@ html, body {
   margin-right: 100px;
 }
 
+/*
 .top-nav:hover {
   text-decoration: underline;
   text-decoration-color: #fff;
 }
 .top-nav a {
+
+}
+ */
+
+.top-nav a {
   color: #fff;
   text-decoration: none;
   font-size: 24px;
   font-weight: 400;
+  position: relative;               /* for the underline pseudo */
+  display: inline-block;            /* so transform:scale works */
+  transition: transform 0.2s ease;  /* smooth inflate */
 }
 
-.sidebar {
+.top-nav a:hover {
+  transform: scale(1.1);            /* inflate */
+}
+
+.top-nav a::after {
+  content: "";
   position: absolute;
+  left: 0;
+  bottom: -4px;                     /* tweak to sit just below text */
+  width: 0;
+  height: 2px;
+  background-color: currentColor;   /* inherit the link’s color */
+  transition: width 0.2s ease;
+}
+
+.top-nav a:hover::after {
+  width: 100%;                      /* draw underline */
+}
+
+
+.sidebar {
+  position: fixed;
   top: 0;
   left: 0;
   width: 273px;
-  height: 100%;
+  height: 100vh;
   background: #9C9C9C;
   z-index: 5;
   padding-top: 80px;
@@ -1006,13 +1058,17 @@ html, body {
   border: none;
   border-radius: 4px;
   padding: 6px 12px;
-  font-size: 0.9rem;
   cursor: pointer;
   margin-right: 6px;
+  font-family: 'Built Titling', serif;
+  font-size: 1.3rem;
 }
 
 .history-button:hover {
   background-color: #DE1E29;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 1.8rem;
+  transition: all 0.2s ease;
 }
 
 /* Responsive adjustments */
@@ -1037,6 +1093,7 @@ html, body {
   transition: all 0.2s ease;
   text-transform: uppercase;
   font-size: 0.85rem;
+  font-family: 'Built Titling', serif;
   letter-spacing: 0.5px;
 }
 
@@ -1044,22 +1101,28 @@ html, body {
 .start-button {
   background-color: #4CAF50;
   color: white;
+  font-family: 'Built Titling', serif;
+  font-size: 1.3rem;
 }
 
 .start-button:hover {
   background-color: #45a049;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 1.8rem;
 }
 
 /* Cancel button - red color scheme */
 .cancel-button {
   background-color: #f44336;
   color: white;
+  font-family: 'Built Titling', serif;
+  font-size: 1.3rem;
 }
 
 .cancel-button:hover {
   background-color: #d32f2f;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 1.8rem;
 }
 
 /* View History button */
@@ -1067,6 +1130,7 @@ html, body {
   background-color: #2196F3;
   color: white;
   margin-right: 8px;
+  font-family: 'Built Titling', serif;
 }
 
 .view-history-button:hover {

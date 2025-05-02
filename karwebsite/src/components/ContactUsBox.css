@@ -170,18 +170,21 @@
   text-align: center;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  position: relative;
 }
 
 .appointment-text {
   font-size: 2rem;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   margin-top: 10px;
 }
 
 .contact-us-wrapper .schedule-appointment-btn {
   position: absolute;    /* make sure you set position */
-  bottom: 480px;
   top: inherit;
+  bottom: -15px;             /* 10% of viewport height */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Responsive layout */
