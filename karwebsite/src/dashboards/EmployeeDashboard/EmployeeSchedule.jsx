@@ -129,6 +129,14 @@ const EmployeeSchedule = () => {
   const fetchAppointmentsForDate = async (date) => {
     try {
       setLoading(true);
+      /*
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:5999/api/appointments', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      */
       const token = localStorage.getItem('token');
       const response = await axios.get('http://localhost:5999/api/appointments', {
         headers: {

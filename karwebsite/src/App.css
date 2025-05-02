@@ -411,6 +411,7 @@ html, body {
   flex: 1;
   text-align: center;
   font-size: 36px;
+  font-size: 36px;
 }
 
 .schedule-cancel {
@@ -757,6 +758,7 @@ html, body {
   align-items: flex-start;
   margin-bottom: 20px;
   font-size: 30px;
+  font-size: 30px;
 }
 
 .customer-info {
@@ -801,14 +803,18 @@ html, body {
   background-color: #fcd3d3
 }
 /*
+/*
 .status-badge.status-waiting {
   background-color: #FFA726;
 }
   */
 /*
+  */
+/*
 .status-badge.status-in_progress {
   background-color: #4CAF50;
 }
+*/
 */
 .status-badge.status-completed {
   background-color: #2196F3;
@@ -1071,7 +1077,14 @@ html, body {
 /* Complete button */
 .complete-button {
   background-color: #4caf50;
+  background-color: #4caf50;
   color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-right: 6px;
   border: none;
   border-radius: 4px;
   padding: 6px 12px;
@@ -1081,6 +1094,7 @@ html, body {
 }
 
 .complete-button:hover {
+  background-color: #45a049;
   background-color: #45a049;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

@@ -9,6 +9,8 @@ const CustomerAppointmentHistory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
+
   useEffect(() => {
     // Fetch appointment history when component mounts
     if (currentUser && currentUser.email) {
@@ -73,13 +75,16 @@ const CustomerAppointmentHistory = () => {
               </span>
             </div>
             {/*<div className="appointment-details">*/}
+              {/*<h3 className="schedule-service">{appointment.event_type}</h3>*/}
+            {/*<div className="appointment-details">*/}
               <h3 className="schedule-service">{appointment.event_type}</h3>
               <div className="vehicle-info">
                 <span className="vehicle">{appointment.vehicle_year} {appointment.vehicle_make} {appointment.vehicle_model}</span>
                 
+                
               </div>
             
-          </div>
+            </div>
         ))}
       </div>
     </div>

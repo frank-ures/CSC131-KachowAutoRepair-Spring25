@@ -152,8 +152,7 @@ export default App;
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
-import { useAuth } from './context/AuthContext'; // Import the AuthProvider
+import { AuthProvider, useAuth } from './context/AuthContext'; // Single import
 
 // Dashboard components
 import EmployeeDashboard from './dashboards/EmployeeDashboard/EmployeeDashboard';
@@ -170,7 +169,6 @@ import ReviewsPage from "./HomePages/ReviewsPage/ReviewsPage";
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';
-
 import './App.css';
 
 

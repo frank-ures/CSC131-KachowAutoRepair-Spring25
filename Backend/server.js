@@ -97,6 +97,7 @@ app.get("/", (req, res) => {
 });
 
 
+
 // API endpoint to get appointments
 app.get("/api/appointments", async (req, res) => {
   let mongoClient;
@@ -125,6 +126,7 @@ app.get("/api/appointments", async (req, res) => {
   }
 
 });
+
 
 
 //------------ Calendly Webhook Handler ------------
