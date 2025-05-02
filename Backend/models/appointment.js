@@ -11,6 +11,10 @@ const AppointmentSchema = new mongoose.Schema({
   vehicle_year: { type: String },
   vehicle_license_plate: { type: String },
   other_information: { type: String },
+  //added for emailapi
+  status: { type: String, enum: ['scheduled', 'in_progress', 'completed'], default: 'scheduled' },
+  started_at: { type: Date },
+  completed_at: { type: Date }
 }, {
   collection: 'events', });
 

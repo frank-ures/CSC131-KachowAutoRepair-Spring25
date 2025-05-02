@@ -12,6 +12,7 @@ import { MongoClient } from "mongodb";
 import ngrok from '@ngrok/ngrok';
 import fetch from 'node-fetch';
 import reviewRoutes from "./routes/reviews.js";
+import nodemailer from 'nodemailer';
 
 dotenv.config();
 
@@ -111,7 +112,15 @@ app.get("/", (req, res) => {
 });
 
 
-
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: Number(process.env.EMAIL_PORT),
+  secure: process.env.EMAIL_SECURE === "true",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 // API endpoint to get appointments
 app.get("/api/appointments", async (req, res) => {
   let mongoClient;
@@ -255,7 +264,7 @@ app.post("/api/appointments/start", async (req, res) => {
 app.post("/api/appointments/complete", async (req, res) => {
   let mongoClient;
   try {
-    const { appointmentId, status } = req.body;
+    const { appointmentId } = req.body;
     
     if (!appointmentId) {
       return res.status(400).send("Appointment ID is required");
@@ -267,21 +276,66 @@ app.post("/api/appointments/complete", async (req, res) => {
     const db = mongoClient.db("calendarDB");
     const collection = db.collection("events");
     
-    // Update the appointment with the new status
-    const result = await collection.updateOne(
-      { _id: new mongoose.Types.ObjectId(appointmentId) },
-      { $set: { status: status, completed_at: new Date().toISOString() } }
-    );
+    // First, get the appointment details for the email
+    const appointment = await collection.findOne({
+      _id: new mongoose.Types.ObjectId(appointmentId)
+    });
     
-    if (result.matchedCount === 0) {
+    if (!appointment) {
       return res.status(404).send("Appointment not found");
     }
     
-    console.log(`Appointment ${appointmentId} updated to status: ${status}`);
-    res.status(200).json({ message: "Appointment status updated successfully" });
+    // Update the appointment with the new status
+    const result = await collection.updateOne(
+      { _id: new mongoose.Types.ObjectId(appointmentId) },
+      { $set: { 
+        status: 'completed', 
+        completed_at: new Date().toISOString() 
+      }}
+    );
+    
+    console.log(`Appointment ${appointmentId} updated to status: completed`);
+    
+    // Now send the email notification
+    try {
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: appointment.invitee_email,
+        subject: 'Your Vehicle Service is Complete - Kachow Auto Repair',
+        text: `Hello ${appointment.invitee_name},
+
+The service on your ${appointment.vehicle_year} ${appointment.vehicle_make} ${appointment.vehicle_model} has been completed. Your vehicle is ready for pickup.
+
+Thank you for choosing Kachow Auto Repair!`
+      };
+      
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Email sending failed:', error);
+          
+          return res.status(200).json({
+            message: "Appointment completed successfully but email notification failed",
+            error: error.message
+          });
+        } else {
+          console.log('Email sent successfully:', info.response);
+          
+          return res.status(200).json({
+            message: "Appointment completed successfully and notification sent"
+          });
+        }
+      });
+    } catch (emailError) {
+      console.error('Email setup error:', emailError);
+      
+      return res.status(200).json({
+        message: "Appointment completed successfully but email notification failed",
+        error: emailError.message
+      });
+    }
   } catch (error) {
     console.error("Error updating appointment status:", error);
-    res.status(500).send("Error updating appointment status");
+    return res.status(500).send("Error updating appointment status");
   } finally {
     if (mongoClient) {
       await mongoClient.close();
