@@ -193,32 +193,80 @@ router.post('/logout', (req, res) => {
 
 // Update your existing login route
 router.post('/login', async (req, res) => {
-  User.mfaEnabled = true;
   try {
       const { email, password, mfaCode } = req.body;
-      const user = await User.findOne({ email });
+      console.log("Login attempt for email:", email, "MFA code provided:", !!mfaCode);
+      
+      // Validate input
+      if (!email || !password) {
+          return res.status(400).json({ error: 'Email and password are required' });
+      }
 
+      // Find the user
+      const user = await User.findOne({ email });
+      
+      // If no user found, return invalid credentials
       if (!user) {
           return res.status(401).json({ error: 'Invalid credentials' });
       }
 
+      // Verify password
       const passwordMatch = await bcrypt.compare(password, user.password);
-
       if (!passwordMatch) {
           return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // Check if MFA is enabled and if there's an MFA code provided
-      if (user.mfaEnabled) {
+      console.log("Password verified for user:", email);
+
+      // Initialize MFA fields if they don't exist
+      // This handles users created before MFA was implemented
+      let userUpdated = false;
+      
+      if (user.mfaEnabled === undefined) {
+          user.mfaEnabled = false;
+          userUpdated = true;
+      }
+      
+      if (user.emailVerified === undefined) {
+          user.emailVerified = true;
+          userUpdated = true;
+      }
+      
+      if (!user.verificationCode) {
+          user.verificationCode = { code: null, expiresAt: null };
+          userUpdated = true;
+      }
+
+      // Save the user if fields were updated
+      if (userUpdated) {
+          await user.save();
+          console.log("Updated user with missing MFA fields:", email);
+      }
+
+      // Check if MFA is required for this login
+      const requireMfaForThisLogin = user.mfaEnabled && 
+          (!user.emailVerified || process.env.REQUIRE_MFA_ALWAYS === 'true');
+      
+      console.log("MFA required for this login:", requireMfaForThisLogin);
+
+      // Handle MFA if required
+      if (requireMfaForThisLogin) {
           if (!mfaCode) {
               // No MFA code provided, send one
-              await generateAndSendMfaCode(user);
-              
-              return res.status(200).json({
-                  requireMfa: true,
-                  userId: user._id,
-                  message: 'Authentication code sent to your email.'
-              });
+              try {
+                  await generateAndSendMfaCode(user);
+                  return res.status(200).json({
+                      requireMfa: true, 
+                      userId: user._id,
+                      message: 'Authentication code sent to your email'
+                  });
+              } catch (mfaError) {
+                  console.error("Error sending MFA code:", mfaError);
+                  return res.status(500).json({ 
+                      error: 'Failed to send verification code',
+                      details: mfaError.message
+                  });
+              }
           } else {
               // MFA code provided, verify it
               if (!user.verificationCode || !user.verificationCode.code) {
@@ -233,12 +281,21 @@ router.post('/login', async (req, res) => {
                   return res.status(400).json({ error: 'Invalid verification code' });
               }
               
+              console.log("MFA code verified successfully for user:", email);
+              
               // Clear the code after successful verification
               user.verificationCode = { code: null, expiresAt: null };
+              
+              // If this was a verification of a new account, mark email as verified
+              if (!user.emailVerified) {
+                  user.emailVerified = true;
+              }
+              
               await user.save();
           }
       }
 
+      // If we reach this point, either MFA was successful or not required
       // Generate JWT token
       const payload = {
           userId: user._id,
@@ -254,17 +311,32 @@ router.post('/login', async (req, res) => {
           { expiresIn: '1h' }
       );
 
+      console.log("Login successful for user:", email);
+      
       // Send back user info and token
       res.json({ 
-          user, 
+          user: {
+              _id: user._id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              role: user.role,
+              mfaEnabled: user.mfaEnabled,
+              emailVerified: user.emailVerified
+          },
           role: user.role, 
           token 
       });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+      console.error("Login error:", error);
+      res.status(500).json({ 
+          error: 'Internal server error', 
+          message: process.env.NODE_ENV === 'development' ? error.message : 'An unexpected error occurred',
+          stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
   }
 });
+
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
 

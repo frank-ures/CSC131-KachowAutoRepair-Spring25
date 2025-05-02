@@ -9,12 +9,18 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true }, // Store hashed passwords
   hourlyWage: { type: Number, default: 0 },
   vehicleIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'vehicle' }],
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }],
+  // Appointments were saved as a string in the database breaking login somehow
+  //appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }],
+  appointments: { 
+    type: mongoose.Schema.Types.Mixed, 
+    default: []
+  },
   //added for password reset
   resetToken: { type: String },
   resetTokenExpiry: { type: Date },
   // MFA fields - added
   mfaEnabled: { type: Boolean, default: true },
+  emailVerified: { type: Boolean, default: false },
   verificationCode: {
     code: { type: String },
     expiresAt: { type: Date }
