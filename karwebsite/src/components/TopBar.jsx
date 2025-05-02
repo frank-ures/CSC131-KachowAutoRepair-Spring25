@@ -15,7 +15,7 @@ const TopBar = () => {
     setIsLoggedIn(isAuthenticated);
     if (isAuthenticated) {
       const currentPath = window.location.pathname;
-      const isDashboardPath = ["customer", "/employee", "/admin"].some((path) =>
+      const isDashboardPath = ["/customer", "/employee", "/admin"].some((path) =>
         currentPath.startsWith(path)
       );
       setRightButtonText(isDashboardPath ? "Logout" : "Account");

@@ -42,7 +42,6 @@ const CustomerSidebar = ({ activeSection, setActiveSection, }) => {
                     ))}
                 </ul>
             </nav>
-            <div className="logout">Log out</div>
         </aside>
     );
 };
