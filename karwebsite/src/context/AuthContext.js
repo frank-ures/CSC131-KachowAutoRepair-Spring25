@@ -12,7 +12,9 @@ export const AuthProvider = ({ children }) => {
 
   // Function to make authenticated API calls - moved up to be used in checkLoggedIn
   const authFetch = useCallback(async (endpoint, options = {}) => {
-    const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}/api/${endpoint}`;
+    const url = endpoint.startsWith("http")
+      ? endpoint
+      : `${API_BASE_URL}/api/${endpoint}`;
 
     const token = localStorage.getItem("token");
     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
@@ -39,9 +41,9 @@ export const AuthProvider = ({ children }) => {
   // Check for stored token and fetch user profile
   const checkLoggedIn = useCallback(async () => {
     try {
-      console.log("Checking if user logged in");
+      // console.log("Checking if user logged in");
       const token = localStorage.getItem("token");
-      console.log("Token exists –", !!token);
+      // console.log("Token exists –", !!token);
 
       if (!token) {
         setCurrentUser(null);
@@ -49,41 +51,50 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
+      // Set a timeout to handle cases where the server might not respond
+      const timeoutPromise = new Promise((resolve) => {
+        setTimeout(() => {
+          // console.log("Auth check timed out, using cached data");
+          resolve("timeout");
+        }, 3000); // 3 second timeout
+      });
+
       const caughtUser = localStorage.getItem("user");
       if (caughtUser) {
         try {
           const userData = JSON.parse(caughtUser);
-          console.log("Using caught user data:", userData);
+          // console.log("Using caught user data:", userData);
           setCurrentUser(userData);
         } catch (e) {
           console.error("Error parsing caught user:", e);
         }
       }
 
-      // Fetch user profile
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/profile`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        
+      // Race the fetch with a timeout
+      const fetchPromise = fetch(`${API_BASE_URL}/api/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (result === "timeout") {
+      } else {
+        const response = result;
         if (response.ok) {
           const userData = await response.json();
-          console.log("Fresh user profile loaded:", userData);
+          // console.log("Fresh user profile loaded:", userData);
           setCurrentUser(userData);
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem("user", JSON.stringify(userData));
         } else {
           console.log("Invalid token, status:", response.status);
           if (response.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
             setCurrentUser(null);
           }
         }
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-        // We already have cached user data, so don't clear on network errors
       }
     } catch (error) {
       console.error("Authentication error:", error);
@@ -99,7 +110,7 @@ export const AuthProvider = ({ children }) => {
   }, [checkLoggedIn]);
 
   // Login function
-  const login = async (email, password) => {
+  const login = async (email, password, mfaCode = null) => {
     try {
       setAuthError(null);
       setIsLoading(true);
@@ -109,7 +120,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, mfaCode }),
       });
 
       const data = await response.json();
@@ -118,14 +129,23 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.error || "Login failed");
       }
 
+      if (data.requireMfa) {
+        return {
+          success: false,
+          requireMfa: true,
+          userId: data.userId,
+          message: data.message,
+        };
+      }
+
       console.log("Login successful:", data);
 
       // Store token in localStorage
       localStorage.setItem("token", data.token);
 
       if (data.user) {
-        console.log("Storing user data from login:", data.user);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        // console.log("Storing user data from login:", data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         setCurrentUser(data.user);
       }
 
@@ -177,6 +197,6 @@ export const useAuth = () => {
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-  console.log(context);
+  // console.log(context);
   return context;
 };

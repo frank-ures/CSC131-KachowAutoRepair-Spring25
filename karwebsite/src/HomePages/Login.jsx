@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [mfaCode, setMfaCode] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [serverError, setServerError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [requireMfa, setRequireMfa] = useState(false);
@@ -38,6 +39,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerError("");
     
     // If we're submitting the MFA code
     if (requireMfa) {
@@ -61,13 +63,13 @@ const LoginPage = () => {
           
           // Navigate based on role
           if (data.role === "admin") {
-            navigate("/admin");
+            navigate("/admin", { replace: true });
           } else if (data.role === "mechanic") {
-            navigate("/employee");
+            navigate("/employee", { replace: true });
           } else if (data.role === "customer") {
-            navigate("/customer");
+            navigate("/customer", { replace: true });
           } else {
-            navigate("/");
+            navigate("/", { replace: true });
           }
         } else {
           console.error("MFA verification failed:", data);
@@ -90,49 +92,31 @@ const LoginPage = () => {
       setIsLoading(true);
       try {
         // Use fetch directly for more control over the MFA process
-        const response = await fetch("http://localhost:5999/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
+        // const response = await fetch("http://localhost:5999/auth/login", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ email, password }),
+        // });
+        const result = await login(email, password);
 
-        const data = await response.json();
+        // const data = await response.json();
 
-        if (response.ok) {
-          // Check if MFA is required
-          if (data.requireMfa) {
-            setRequireMfa(true);
-            setUserId(data.userId);
-            alert("A verification code has been sent to your email. Please check your inbox and enter the code below.");
-            setIsLoading(false);
-            return;
-          }
-
-          // Normal login success
-          console.log("Login successful:", data);
-          localStorage.setItem("token", data.token);
+        if (result.success) {
+          console.log("Login successful through context:", result);
           
-          if (data.user) {
-            localStorage.setItem("user", JSON.stringify(data.user));
-          }
-          
-          // Navigate based on role
-          if (data.role === "admin") {
-            navigate("/admin");
-          } else if (data.role === "mechanic") {
-            navigate("/employee");
-          } else if (data.role === "customer") {
-            navigate("/customer");
-          } else {
-            navigate("/");
-          }
+          // Let the AuthContext redirect via the RoleRouter
+          navigate("/role-router", { replace: true });
+        } else if (result.requireMfa) {
+          setRequireMfa(true);
+          setUserId(result.userId);
+          alert("A verification code has been sent to your email. Please check your inbox and enter the code below.");
         } else {
-          console.error("Login failed:", data);
-          alert(data.error || "Login failed");
+          console.error("Login failed:", result);
+          setServerError(result.error || "Login failed");
         }
       } catch (error) {
         console.error("Error during login:", error);
-        alert("Network or server error");
+        setServerError("Network or server error");
       } finally {
         setIsLoading(false);
       }
@@ -149,6 +133,9 @@ const LoginPage = () => {
           <div className="login-form-container">
             <h2>Welcome Back!</h2>
             <p>Please enter your login credentials</p>
+            {serverError && (
+              <div className="server-error-message">{serverError}</div>
+            )}
             <form className="login-form" onSubmit={handleSubmit}>
               <label htmlFor="email-field">Email Address</label>
               <input
