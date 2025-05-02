@@ -8,9 +8,12 @@ import { useAuth } from '../context/AuthContext';
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [requireMfa, setRequireMfa] = useState(false);
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -33,70 +36,99 @@ const LoginPage = () => {
     return true;
   };
 
-  // const loginUser = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:5999/auth/login", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ email, password }),
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (response.ok) {
-  //       console.log("Login successful:", data);
-  //       // Store token in localStorage
-  //       localStorage.setItem("token", data.token);
-  //       // Redirect based on role if provided
-  //       // navigate('/role-router');
-  //       if (data.user) {
-  //         localStorage.setItem("user", JSON.stringify(data.user));
-  //       }
-  //       if (data.role === "admin") {
-  //         navigate("/admin");
-  //       } else if (data.role === "mechanic") {
-  //         navigate("/employee");
-  //       } else if (data.role === "customer") {
-  //         navigate("/customer");
-  //       } else {
-  //         navigate("/");
-  //       }
-  //     } else {
-  //       console.error("Login failed:", data);
-  //       alert(data.error || "Login failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during login:", error);
-  //     alert("Network or server error");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // If we're submitting the MFA code
+    if (requireMfa) {
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://localhost:5999/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, mfaCode }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Login successful:", data);
+          localStorage.setItem("token", data.token);
+          
+          if (data.user) {
+            localStorage.setItem("user", JSON.stringify(data.user));
+          }
+          
+          // Navigate based on role
+          if (data.role === "admin") {
+            navigate("/admin");
+          } else if (data.role === "mechanic") {
+            navigate("/employee");
+          } else if (data.role === "customer") {
+            navigate("/customer");
+          } else {
+            navigate("/");
+          }
+        } else {
+          console.error("MFA verification failed:", data);
+          alert(data.error || "Verification failed");
+        }
+      } catch (error) {
+        console.error("Error during MFA verification:", error);
+        alert("Network or server error");
+      } finally {
+        setIsLoading(false);
+      }
+      return;
+    }
+    
+    // Normal login flow
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
 
     if (isEmailValid && isPasswordValid) {
       setIsLoading(true);
       try {
-        const result = await login(email, password);
+        // Use fetch directly for more control over the MFA process
+        const response = await fetch("http://localhost:5999/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
 
-        if (result.success) {
-          console.log("Login success, role:", result.role);
+        const data = await response.json();
 
+        if (response.ok) {
+          // Check if MFA is required
+          if (data.requireMfa) {
+            setRequireMfa(true);
+            setUserId(data.userId);
+            alert("A verification code has been sent to your email. Please check your inbox and enter the code below.");
+            setIsLoading(false);
+            return;
+          }
+
+          // Normal login success
+          console.log("Login successful:", data);
+          localStorage.setItem("token", data.token);
+          
+          if (data.user) {
+            localStorage.setItem("user", JSON.stringify(data.user));
+          }
+          
           // Navigate based on role
-          if (result.role === "admin") {
+          if (data.role === "admin") {
             navigate("/admin");
-          } else if (result.role === "mechanic") {
+          } else if (data.role === "mechanic") {
             navigate("/employee");
-          } else if (result.role === "customer") {
+          } else if (data.role === "customer") {
             navigate("/customer");
           } else {
             navigate("/");
           }
         } else {
-          console.error("Login failed:", result.error);
-          alert(result.error || "Login failed");
+          console.error("Login failed:", data);
+          alert(data.error || "Login failed");
         }
       } catch (error) {
         console.error("Error during login:", error);
@@ -127,6 +159,7 @@ const LoginPage = () => {
                 onBlur={validateEmail}
                 spellCheck="false"
                 placeholder="Enter Email Address Here..."
+                disabled={requireMfa}
               />
               {emailError && (
                 <span className="login-error-message">{emailError}</span>
@@ -140,21 +173,40 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 onBlur={validatePassword}
                 placeholder="Enter Password Here..."
+                disabled={requireMfa}
               />
               {passwordError && (
                 <span className="login-error-message">{passwordError}</span>
               )}
 
+              {requireMfa && (
+                <>
+                  <label htmlFor="mfa-code">Verification Code</label>
+                  <input
+                    type="text"
+                    id="mfa-code"
+                    value={mfaCode}
+                    onChange={(e) => setMfaCode(e.target.value)}
+                    placeholder="Enter verification code from your email"
+                    autoFocus
+                  />
+                </>
+              )}
+
               <button type="submit" disabled={isLoading}>
-                {isLoading ? "Signing In..." : "Sign In"}
+                {isLoading ? "Signing In..." : requireMfa ? "Verify Code" : "Sign In"}
               </button>
             </form>
-            <a href="/forgotPassword" className="login-link">
-              Forgot your password?
-            </a>
-            <a href="/register" className="login-link">
-              Don't have an account? Sign Up
-            </a>
+            {!requireMfa && (
+              <>
+                <a href="/forgotPassword" className="login-link">
+                  Forgot your password?
+                </a>
+                <a href="/register" className="login-link">
+                  Don't have an account? Sign Up
+                </a>
+              </>
+            )}
           </div>
           <div className="login-image-container">
             <img src={loginBkgImg} alt="Login Background" />

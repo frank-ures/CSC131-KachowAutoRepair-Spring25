@@ -12,7 +12,13 @@ const UserSchema = new mongoose.Schema({
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'appointment' }],
   //added for password reset
   resetToken: { type: String },
-  resetTokenExpiry: { type: Date }
+  resetTokenExpiry: { type: Date },
+  // MFA fields - added
+  mfaEnabled: { type: Boolean, default: true },
+  verificationCode: {
+    code: { type: String },
+    expiresAt: { type: Date }
+  }
 });
 
 export default mongoose.model('user', UserSchema);

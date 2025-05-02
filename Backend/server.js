@@ -26,6 +26,20 @@ app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true // Allow cookies if needed
 }));
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    
+    // Allow all localhost and ngrok origins
+    if(origin.includes('localhost') || origin.includes('ngrok')) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
 // app.use(cors()); // commented out to resolve conflict
 app.use('/auth', authRoutes);
 app.use('/reviews', reviewRoutes);
