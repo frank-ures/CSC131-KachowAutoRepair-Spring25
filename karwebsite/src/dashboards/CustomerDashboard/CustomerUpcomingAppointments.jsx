@@ -2,12 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import CustomerScheduleAnAppointment from './CustomerScheduleAnAppointment';
+
+
+
 
 const CustomerAppointmentHistory = () => {
   const { currentUser } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+ 
 
   useEffect(() => {
     // Fetch appointment history when component mounts
@@ -20,21 +25,6 @@ const CustomerAppointmentHistory = () => {
   }, [currentUser]);
 
 
-/*
-const CustomerAppointmentHistory = ({ userEmail }) => {
-  const [appointments, setAppointments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-
-  useEffect(() => {
-    // Fetch appointment history when component mounts
-    if (userEmail) {
-      fetchAppointmentHistory();
-    }
-  }, [userEmail]);
-*/
   const fetchAppointmentHistory = async (email) => {
     try {
       setLoading(true);
@@ -42,7 +32,7 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
       const response = await axios.get(`http://localhost:5999/api/appointments/history?email=${encodeURIComponent(email)}`);
       ////////////changed filter to get completed appointments only
       const completedAppointments = response.data.filter(appointment => 
-        appointment.status !== 'completed' && appointment.status !== 'in_progress');
+        appointment.status !== 'completed' && appointment.status !== 'in_progress' && appointment.status !== 'canceled');
       //setAppointments to completed appointments instead of response.data
       setAppointments(completedAppointments);
       setLoading(false);
@@ -71,6 +61,48 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
       default: return 'status-scheduled'; // Default status if none specified
     }
   };
+
+
+  const handleCancel = async (appointment, e) => {
+    if (e) e.stopPropagation();
+    if (window.confirm('Are you sure you want to cancel this appointment?')) {
+      try {
+        
+        const response = await axios.delete(`http://localhost:5999/api/appointments/${appointment._id}`);
+        
+        if (response.status === 200){
+          alert('Appointment Cancelled Successfully');
+        }
+          
+        
+        // need an API endpoint to handle cancellation
+        // await axios.delete(`/api/appointments/${id}`);
+        //setScheduleTasks(scheduleTasks.filter(task => task._id !== id));
+        setAppointments(appointments.filter(apt => apt._id !== appointment._id));
+
+      } catch (err) {
+        console.error('Failed to cancel appointment:', err);
+        alert('Failed to cancel appointment. Please try again.');
+      }
+    }
+  };
+
+  /************************ *
+  const HandleUpdateAppointment = () => {
+    const [activeSection, setActiveSection] = useState('CustomerScheduleAnAppointment');
+    //const [firstName, setFirstName] = useState('CustomerName'); // dynamic in the future
+
+/*
+    const setSection = () => {
+      activeSection=<CustomerScheduleAnAppointment />;
+    };
+*
+};
+*/
+    
+  
+  
+  
 
   if (loading) return <div className="loading">Loading your upcoming appointments...</div>;
   if (error) return <div className="error-message">{error}</div>;
@@ -103,7 +135,10 @@ const CustomerAppointmentHistory = ({ userEmail }) => {
             </div>
             
 
-              <button className="update-button"> Update Appointment </button>
+              <button className="update-button"
+              /*onClick={() => HandleUpdateAppointment(appointment)}*/> Update Appointment </button>
+              <button className="cancel-appt-button"
+              onClick={(e) => handleCancel(appointment, e)}>Cancel</button>
               </div>
              
             

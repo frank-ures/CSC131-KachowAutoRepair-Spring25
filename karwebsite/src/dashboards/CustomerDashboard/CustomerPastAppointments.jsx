@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 
+
 const CustomerAppointmentHistory = () => {
   const { currentUser } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
 
 
   useEffect(() => {
@@ -57,6 +58,8 @@ const CustomerAppointmentHistory = () => {
     }
   };
 
+
+
   if (loading) return <div className="loading">Loading your appointment history...</div>;
   if (error) return <div className="error-message">{error}</div>;
   if (appointments.length === 0) return <div className="no-appointments">You don't have any previous appointments.</div>;
@@ -74,13 +77,9 @@ const CustomerAppointmentHistory = () => {
                  appointment.status === 'in_progress' ? 'In Progress' : 'Scheduled'}
               </span>
             </div>
-            {/*<div className="appointment-details">*/}
-              {/*<h3 className="schedule-service">{appointment.event_type}</h3>*/}
-            {/*<div className="appointment-details">*/}
-            {/*<div className="appointment-content">*/}
+            
               <h3 className="schedule-service">{appointment.event_type}</h3>
-              {/*<button className="update-button"> Update Appointment </button>*/}
-              {/*</div>*/}
+              
               
 
               <div className="vehicle-info">
