@@ -15,7 +15,7 @@ const TopBar = () => {
     setIsLoggedIn(isAuthenticated);
     if (isAuthenticated) {
       const currentPath = window.location.pathname;
-      const isDashboardPath = ["customer", "/employee", "admin"].some((path) =>
+      const isDashboardPath = ["/customer", "/employee", "/admin"].some((path) =>
         currentPath.startsWith(path)
       );
       setRightButtonText(isDashboardPath ? "Logout" : "Account");
@@ -31,33 +31,7 @@ const TopBar = () => {
     } else if (rightButtonText === "Logout") {
       handleLogout(e);
     } else {
-      navigateToDashboard();
-    }
-  };
-
-  const navigateToDashboard = () => {
-    try {
-      const userData = JSON.parse(localStorage.getItem("user"));
-      if (userData && userData.role) {
-        switch (userData.role) {
-          case "admin":
-            navigate("/admin");
-            break;
-          case "mechanic":
-            navigate("/employee");
-            break;
-          case "customer":
-            navigate("/customer");
-            break;
-          default:
-            navigate("/");
-        }
-      } else {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.error("Error parsing user data:", error);
-      navigate("/login");
+      navigate("/role-router");
     }
   };
 
