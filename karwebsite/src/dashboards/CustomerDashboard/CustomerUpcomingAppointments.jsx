@@ -87,18 +87,30 @@ const CustomerAppointmentHistory = () => {
     }
   };
 
-  /************************ *
-  const HandleUpdateAppointment = () => {
-    const [activeSection, setActiveSection] = useState('CustomerScheduleAnAppointment');
-    //const [firstName, setFirstName] = useState('CustomerName'); // dynamic in the future
+  const handleUpdateAppointment = async (appointment, e) => {
+    if (e) e.stopPropagation();
+    if (window.confirm("Press 'OK' to cancel the appointment, and please reschedule using the Schedule An Appoinment page!")) {
+      try {
+        const response = await axios.delete(`http://localhost:5999/api/appointments/${appointment._id}`);
 
-/*
-    const setSection = () => {
-      activeSection=<CustomerScheduleAnAppointment />;
-    };
-*
-};
-*/
+        if (response.status === 200) {
+          alert('Appointment Cancelled Successfully');
+        }
+
+        setAppointments(appointments.filter(apt => apt._id !== appointment._id));
+
+      } catch (err ) {
+        console.error('Failed to cancel appointment:', err);
+        alert('Failed to cancel appointment. Please try again');
+      }
+    }
+  };
+
+
+    
+
+
+
     
   
   
@@ -136,7 +148,7 @@ const CustomerAppointmentHistory = () => {
             
 
               <button className="update-button"
-              /*onClick={() => HandleUpdateAppointment(appointment)}*/> Update Appointment </button>
+              onClick={() => handleUpdateAppointment(appointment)}> Update Appointment </button>
               <button className="cancel-appt-button"
               onClick={(e) => handleCancel(appointment, e)}>Cancel</button>
               </div>
