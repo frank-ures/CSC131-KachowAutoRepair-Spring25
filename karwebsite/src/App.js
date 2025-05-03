@@ -18,6 +18,8 @@ import Login from './HomePages/Login';
 import RegisterPage from './HomePages/Register';
 import ForgotPassword from './HomePages/ForgotPassword';
 import ResetPassword from './HomePages/ResetPassword';
+import PrivacyPolicy from './HomePages/PrivacyPolicy';
+import TermsOfService from './HomePages/TermsOfService';
 
 // Import Protected Route components
 import { PrivateRoute, AdminRoute } from './components/ProtectedRoutes';
@@ -57,6 +59,8 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
         </Routes>
       </Router>
     </AuthProvider>
