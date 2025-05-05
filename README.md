@@ -62,7 +62,7 @@ etc.
 `npm run build`
 6. Start the project:
 `npm run dev` from `CSC131-KachowAutoRepair-Spring25` directory
-`npm start` from `karwebsite` directory
+`npm start` from `Frontend` directory
 
 ## Usage
 
