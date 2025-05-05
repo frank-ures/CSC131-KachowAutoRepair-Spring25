@@ -27,6 +27,7 @@ app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true // Allow cookies if needed
 }));
+
 app.use(cors({
   origin: function(origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)

@@ -1,0 +1,41 @@
+/* src/components/TEMPLandingPage.css */
+
+/*
+styling for temp/debug dev landing page
+ */
+
+@font-face {
+    font-family: 'Built Titling';
+    src: url('../fonts/built_titling_rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.landing-page {
+    text-align: center;
+    min-height: 100vh;
+    background: #141414;
+    color: #fff;
+    padding-top: 100px;
+    font-family: 'Built Titling', sans-serif;
+}
+
+.landing-page h1 {
+    margin-bottom: 50px;
+    font-size: 64px;
+    text-transform: uppercase;
+}
+
+.landing-page .landing-link {
+    color: #DE1E29;
+    font-size: 48px;
+    text-decoration: none;
+    display: block;
+    margin: 20px 0;
+    transition: 0.3s;
+}
+
+.landing-page .landing-link:hover {
+    text-decoration: underline;
+    text-underline: #DE1E29;
+}

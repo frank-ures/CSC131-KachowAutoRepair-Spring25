@@ -1,0 +1,84 @@
+/* Style for active (clicked) button */
+.events-container button.active {
+  background-color: #DE1E29 !important; /* Red background when active */
+  color: white !important;              /* Text color */
+}
+
+.events-container .event-button {
+  appearance: none !important;          /* Remove default appearance, block of code solves weird styling bug */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+  background-color: #9C9C9C !important;
+  color: white !important;
+  font-size: 32px !important;
+  font-family: "Built Titling", sans-serif !important;
+  padding: 15px 25px !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  width: 250px !important;
+  margin: 10px !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Ensure no outline or shadow when button is focused or active */
+.events-container .event-button:focus,
+.events-container .event-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Hover effect to make the button stand out */
+.events-container .event-button:hover {
+  background-color: #DE1E29 !important;
+  color: white !important;
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.calendly-container {
+  display: flex !important;
+  justify-content: center !important; /* Centers horizontally */
+  align-items: center !important;
+  height: 100vh !important;
+}
+
+.calendly-inline-widget iframe {
+  width: 100% !important;
+  padding: 0 15%;
+}
+
+.calendly-inline-widget {
+  display: block !important;
+  margin: auto !important;
+  width: 90% !important;
+  max-width: 900px !important;
+  height: 800px !important;
+}
+
+/* Container to hold all event buttons */
+.events-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+  padding: 20px !important;
+  justify-content: center !important;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .events-container {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .events-container .event-button {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+}

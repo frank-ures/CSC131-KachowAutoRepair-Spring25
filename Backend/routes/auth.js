@@ -9,7 +9,6 @@ import User from '../models/user.js';
 dotenv.config();
 const router = express.Router();
 
-// Add this to your auth.js file but don't modify the login route yet
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: Number(process.env.EMAIL_PORT),
@@ -67,7 +66,7 @@ const generateAndSendMfaCode = async (user) => {
   });
 };
 
-// Add this to auth.js
+
 router.post('/test-mfa', async (req, res) => {
   try {
     const { email } = req.body;
@@ -156,9 +155,9 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
       role,
       hourlyWage,
-      emailVerified: false,          // Add this
-      registrationComplete: false,    // Add this
-      mfaEnabled: true               // Add this
+      emailVerified: false,
+      registrationComplete: false,
+      mfaEnabled: true
     });
     
     await user.save();
@@ -191,7 +190,7 @@ router.post('/logout', (req, res) => {
     res.clearCookie('token').send('Logged out successfully');
 });
 
-// Update your existing login route
+// login route
 router.post('/login', async (req, res) => {
   try {
       const { email, password, mfaCode } = req.body;
@@ -337,69 +336,51 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/forgot-password', async (req, res) => {
-  const { email } = req.body;
+//  auth/forgot-password
+router.post("/forgot-password", async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: "Email required." });
 
-  try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ error: "User not found." });
 
-    const token = randomBytes(32).toString('hex');
-    user.resetToken = token;
-    user.resetTokenExpiry = Date.now() + 1000 * 60 * 30; // 30 min
+    // reuse your existing MFA helper:
+    await generateAndSendMfaCode(user);
+
+    // return userId so the front end can tie code → user
+    res.json({ message: "Reset code sent to your email.", userId: user._id });
+});
+
+// auth/reset-password
+router.post("/reset-password", async (req, res) => {
+    const { userId, code, newPassword } = req.body;
+    if (!userId || !code || !newPassword) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({ error: "User not found." });
+    }
+
+    // check against the same verificationCode used for MFA
+    if (
+        !user.verificationCode ||
+        user.verificationCode.code !== code ||
+        new Date() > new Date(user.verificationCode.expiresAt)
+    ) {
+        return res.status(400).json({ error: "Invalid or expired code." });
+    }
+
+    // hash & save
+    user.password = await bcrypt.hash(newPassword, 10);
+    // clear code so it can’t be reused
+    user.verificationCode = { code: null, expiresAt: null };
     await user.save();
 
-    const resetLink = `${process.env.FRONTEND_BASE_URL}/resetPassword.html?token=${token}`;
-
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: Number(process.env.EMAIL_PORT),
-      secure: process.env.EMAIL_SECURE === "true", // true for port 465
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: user.email,
-      subject: 'Password Reset Request',
-      html: `<p>Click <a href="${resetLink}">here</a> to reset your password. This link will expire in 30 minutes.</p>`
-    });
-
-    res.json({ message: 'Password reset link sent to your email' });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to send reset link' });
-  }
+    res.json({ message: "Password has been reset." });
 });
-router.post('/reset-password/:token', async (req, res) => {
-  const { token } = req.params;
-  const { newPassword } = req.body;
 
-  try {
-    const user = await User.findOne({
-      resetToken: token,
-      resetTokenExpiry: { $gt: Date.now() }
-    });
-
-    if (!user) return res.status(400).json({ error: 'Invalid or expired token' });
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    user.resetToken = undefined;
-    user.resetTokenExpiry = undefined;
-    await user.save();
-
-    res.json({ message: 'Password reset successful' });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to reset password' });
-  }
-});
 // Route to verify MFA code for email verification
 router.post('/verify-email', async (req, res) => {
   try {
@@ -487,7 +468,7 @@ router.post('/resend-verification', async (req, res) => {
     res.status(500).json({ error: 'Failed to send verification code' });
   }
 });
-// Add this new route to your auth.js file
+
 router.post('/login-with-mfa', async (req, res) => {
   try {
     const { email, password, mfaCode } = req.body;
